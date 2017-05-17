@@ -64,7 +64,12 @@ module.exports = function(config) {
       // only render the graphic after all tests have finished.
       // This is ideal for using this reporter in a continuous
       // integration environment.
-      renderOnRunCompleteOnly: true // default is false
+      renderOnRunCompleteOnly: true, // default is false
+
+      // limit the number of lines of error shown
+      // No error occurs if this limit is longer than 
+      // the number of lines reported.
+      maxLogLines: 5 // default is 9001
     }
   });
 };
