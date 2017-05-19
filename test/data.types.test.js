@@ -8,9 +8,9 @@ chai.config.includeStack = true;
 chai.use(require('sinon-chai'));
 
 var assert = chai.assert;
+var expect = chai.expect;
 var eq = assert.equal;
 var ok = assert.ok;
-
 
 describe('data/types.js test suite', function() {
   var dt, clcFake, right;
@@ -247,6 +247,36 @@ describe('data/types.js test suite', function() {
         sut.toString();
 
         ok(clcFake.blackBright.calledTwice);
+      });
+    });
+
+    describe('setMaxLogLines', function() {
+      it('should set limit to lines when setMaxLogLines is called', function() {
+        dt.setMaxLogLines(3);
+        sut.errors = [
+          'Error Info',
+          'line 1',
+          'line 2',
+          'line 3',
+          'line 4',
+          'line 5'
+        ];
+
+        sut.toString();
+
+        ok(clcFake.black.bgRed.calledTwice);
+        ok(clcFake.black.bgRed.getCall(0).calledWithExactly('line 1'));
+        ok(clcFake.black.bgRed.getCall(1).calledWithExactly('line 2'));
+        expect(clcFake.black.bgRed.getCall(2)).to.be.null;
+      });
+
+      it('should not error out when there are no errors', function() {
+        dt.setMaxLogLines(3);
+        sut.errors = [];
+
+        sut.toString();
+
+        expect(clcFake.black.bgRed.getCall(0)).to.be.null;
       });
     });
 
