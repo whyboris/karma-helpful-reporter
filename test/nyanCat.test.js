@@ -76,7 +76,8 @@ describe('nyanCat.js test suite', function() {
 
     dataTypesFake = {
       'setErrorFormatterMethod' : sinon.spy(),
-      'suppressErrorHighlighting' : sinon.spy()
+      'suppressErrorHighlighting' : sinon.spy(),
+      'setMaxLogLines' : sinon.spy()
     };
 
     printersFake = {
@@ -153,6 +154,7 @@ describe('nyanCat.js test suite', function() {
       expect(sut.adapters[0]).to.be.a.function;
       expect(dataTypesFake.setErrorFormatterMethod.calledOnce).to.be.true;
       expect(dataTypesFake.setErrorFormatterMethod.calledWithExactly(formatterFake)).to.be.true;
+      expect(dataTypesFake.setMaxLogLines.calledOnce).to.be.true;
 
       sut.adapters[0](msg);
     });
@@ -163,6 +165,7 @@ describe('nyanCat.js test suite', function() {
         'suppressErrorHighlighting' : true,
         'numberOfRainbowLines' : 100,
         'renderOnRunCompleteOnly' : true,
+        'maxLogLines' : 9001,
         'someOtherOption' : 1234
       };
 
@@ -172,6 +175,7 @@ describe('nyanCat.js test suite', function() {
       expect(sut.options.suppressErrorHighlighting).to.be.true;
       expect(sut.options.numberOfRainbowLines).to.eq(100);
       expect(sut.options.renderOnRunCompleteOnly).to.be.true;
+      expect(sut.options.maxLogLines).to.eq(9001);
       expect(sut.options.someOtherOption).to.be.undefined;
     });
 
@@ -183,6 +187,16 @@ describe('nyanCat.js test suite', function() {
       sut = new module.NyanCat(null, null, configFake);
 
       expect(dataTypesFake.suppressErrorHighlighting.calledOnce).to.be.true;
+    });
+
+    it('should set limit to the number of lines of error shown if option is set in config', function() {
+      configFake.nyanReporter = {
+        'maxLogLines' : 15
+      };
+
+      sut = new module.NyanCat(null, null, configFake);
+
+      expect(dataTypesFake.setMaxLogLines.calledOnce).to.be.true;
     });
 
   });
