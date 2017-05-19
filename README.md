@@ -64,7 +64,12 @@ module.exports = function(config) {
       // only render the graphic after all tests have finished.
       // This is ideal for using this reporter in a continuous
       // integration environment.
-      renderOnRunCompleteOnly: true // default is false
+      renderOnRunCompleteOnly: true, // default is false
+
+      // remove lines from the final report containing any of these
+      // accepts strings. If you want to stop reporting dozens 
+      // of lines that tell you nothing of value
+      removeLinesContaining: ['@angular', 'zone.js'] // default is []
     }
   });
 };
