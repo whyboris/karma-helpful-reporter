@@ -64,7 +64,16 @@ module.exports = function(config) {
       // only render the graphic after all tests have finished.
       // This is ideal for using this reporter in a continuous
       // integration environment.
-      renderOnRunCompleteOnly: true // default is false
+      renderOnRunCompleteOnly: true, // default is false
+
+      // set custom color options for error report
+      // will only work with numbers permitted in
+      // https://github.com/medikoo/cli-color
+      colorOptions: {
+        testName: 0,  // default is 205
+        browserName: 120, // default is 199
+        firstLine: 255 // default is 211
+      }
     }
   });
 };
