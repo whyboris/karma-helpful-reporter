@@ -147,6 +147,7 @@ describe('nyanCat.js test suite', function() {
       expect(sut.options.suppressErrorHighlighting).to.be.false;
       expect(sut.options.numberOfRainbowLines).to.eq(4);
       expect(sut.options.renderOnRunCompleteOnly).to.be.false;
+      expect(sut.options.maxLogLines).to.be.null;
       expect(sut.adapterMessages).to.be.an.array;
       expect(sut.adapterMessages).to.be.empty;
       expect(sut.adapters).to.be.an.array;
@@ -154,7 +155,7 @@ describe('nyanCat.js test suite', function() {
       expect(sut.adapters[0]).to.be.a.function;
       expect(dataTypesFake.setErrorFormatterMethod.calledOnce).to.be.true;
       expect(dataTypesFake.setErrorFormatterMethod.calledWithExactly(formatterFake)).to.be.true;
-      expect(dataTypesFake.setMaxLogLines.calledOnce).to.be.true;
+      expect(dataTypesFake.setMaxLogLines.called).to.be.false;
 
       sut.adapters[0](msg);
     });
