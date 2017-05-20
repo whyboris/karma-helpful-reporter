@@ -64,7 +64,12 @@ module.exports = function(config) {
       // only render the graphic after all tests have finished.
       // This is ideal for using this reporter in a continuous
       // integration environment.
-      renderOnRunCompleteOnly: true // default is false
+      renderOnRunCompleteOnly: true, // default is false
+
+      // underline filename of some file type
+      // All files in the error report that have this
+      // particular extention will be underlined 
+      underlineFileType: 'spec.ts' // default is ''
     }
   });
 };
