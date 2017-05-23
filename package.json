@@ -4,7 +4,7 @@
         "url": "https://github.com/dgarlitt/karma-nyan-reporter/issues"
     },
     "dependencies": {
-        "cli-color": "^0.3.2"
+        "cli-color": "^1.0.0"
     },
     "description": "Karma reporter with Nyan Cat style logging.",
     "devDependencies": {
