@@ -38,7 +38,9 @@ describe('util/draw.js test suite', function() {
     shellFake.getHeight.returns(shellHeight);
 
     clcFake = {
-      up: sinon.stub(),
+      move: { 
+        up: sinon.stub()
+      },
       yellow: sinon.stub(),
       green: sinon.stub(),
       red: sinon.stub(),
@@ -326,7 +328,7 @@ describe('util/draw.js test suite', function() {
     it('should call write with the expected values', function() {
       var arg = 'blah';
 
-      clcFake.up.returns('up');
+      clcFake.move.up.returns('up');
 
       sut.cursorUp(arg);
 

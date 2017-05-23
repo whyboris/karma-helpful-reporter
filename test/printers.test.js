@@ -22,7 +22,9 @@ describe('printers.js test suite', function() {
       'redBright':    sinon.stub(),
       'cyan':         sinon.stub(),
       'green':        sinon.stub(),
-      'right':        sinon.stub(),
+      'move': {
+        'right':        sinon.stub()
+      },
       'blackBright':  sinon.stub(),
       'white':        sinon.stub(),
       'yellow':       sinon.stub()
@@ -209,7 +211,7 @@ describe('printers.js test suite', function() {
         'skipped': 99
       };
 
-      clcFake.right.returns(tab);
+      clcFake.move.right.returns(tab);
       clcFake.yellow.withArgs(stats.total + ' total').returns('yellow>' + stats.total);
       clcFake.green.withArgs(stats.success + ' passed').returns('green>' + stats.success);
       clcFake.red.withArgs(stats.failed + ' failed').returns('red>' + stats.failed);
@@ -232,11 +234,11 @@ describe('printers.js test suite', function() {
       eq(10, writeFake.callCount);
     });
 
-    it('should call clc.right as expected', function() {
-      eq(4, clcFake.right.callCount);
-      ok(clcFake.right.firstCall.calledWithExactly(5));
-      ok(clcFake.right.secondCall.calledWithExactly(3));
-      ok(clcFake.right.thirdCall.calledWithExactly(3));
+    it('should call clc.move.right as expected', function() {
+      eq(4, clcFake.move.right.callCount);
+      ok(clcFake.move.right.firstCall.calledWithExactly(5));
+      ok(clcFake.move.right.secondCall.calledWithExactly(3));
+      ok(clcFake.move.right.thirdCall.calledWithExactly(3));
     });
 
     it('should call write with the expected arguments', function() {
