@@ -23,7 +23,7 @@
         "nyan",
         "cat"
     ],
-    "license": "The MIT License (MIT)",
+    "license": "MIT",
     "main": "index.js",
     "maintainers": [
         {
