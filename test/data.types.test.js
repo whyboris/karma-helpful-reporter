@@ -13,7 +13,7 @@ var ok = assert.ok;
 
 
 describe('data/types.js test suite', function() {
-  var dt, clcFake, right, move;
+  var dt, clcFake, right;
   var tab = 3;
 
   beforeEach(function(done) {
