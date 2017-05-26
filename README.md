@@ -75,6 +75,11 @@ module.exports = function(config) {
       // accepts strings. If you want to stop reporting dozens 
       // of lines that tell you nothing of value
       removeLinesContaining: ['@angular', 'zone.js'] // default is []
+
+      // underline filename of some file type
+      // All files in the error report that have this
+      // particular extention will be underlined 
+      underlineFileType: 'spec.ts' // default is ''
     }
   });
 };
