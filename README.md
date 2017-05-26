@@ -80,6 +80,15 @@ module.exports = function(config) {
       // All files in the error report that have this
       // particular extention will be underlined 
       underlineFileType: 'spec.ts' // default is ''
+
+      // set custom color options for error report
+      // will only work with numbers permitted in
+      // https://github.com/medikoo/cli-color
+      colorOptions: {
+        testName: 0,  // default is 205
+        browserName: 123, // default is 199
+        firstLine: 255 // default is 211
+      }
     }
   });
 };
