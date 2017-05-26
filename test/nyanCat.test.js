@@ -75,9 +75,16 @@ describe('nyanCat.js test suite', function() {
         .returns(dataStoreInstanceFake);
 
     dataTypesFake = {
+      'clearScreenBeforeEveryRun' : sinon.spy(),
+      'hideBrowser' : sinon.spy(),
+      'removeTail' : sinon.spy(),
+      'resetCounter' : sinon.spy(),
+      'setColorOptions' : sinon.spy(),
       'setErrorFormatterMethod' : sinon.spy(),
-      'suppressErrorHighlighting' : sinon.spy(),
-      'setMaxLogLines' : sinon.spy()
+      'setFileTypeToUnderline' : sinon.spy(),
+      'setLinesToExclude' : sinon.spy(),
+      'setMaxLogLines' : sinon.spy(),
+      'suppressErrorHighlighting' : sinon.spy()
     };
 
     printersFake = {
