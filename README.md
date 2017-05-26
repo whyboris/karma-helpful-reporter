@@ -70,7 +70,7 @@ module.exports = function(config) {
       // limit the number of lines of error shown
       // No error occurs if this limit is longer than 
       // the number of lines reported.
-      maxLogLines: 5, // default is unlimited
+      maxLogLines: 5, // default is 9999
 
       // remove lines from the final report containing any of these
       // accepts strings. If you want to stop reporting dozens 
@@ -99,7 +99,11 @@ module.exports = function(config) {
       // anything that follows '<-'
       // for example `blah blah <- test.ts 4250:39`
       // will become `blah blah`
-      removeTail: true // default is false
+      removeTail: true, // default is false
+
+      // clear screen after every run
+      // happens before the Nyan cat is rendered
+      clearScreenBeforeEveryRun: true; // default is false
     }
   });
 };
