@@ -89,7 +89,7 @@ module.exports = function(config) {
         testName: 0,  // default is 205
         browserName: 123, // default is 199
         firstLine: 225, // default is 211
-        loggedErrors: 255 // default is 217
+        loggedErrors: 255 // default is 250
       },
 
       // hide from the final report the browser involved
