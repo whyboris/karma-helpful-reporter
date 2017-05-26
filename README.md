@@ -69,17 +69,17 @@ module.exports = function(config) {
       // limit the number of lines of error shown
       // No error occurs if this limit is longer than 
       // the number of lines reported.
-      maxLogLines: 5 // default is unlimited
+      maxLogLines: 5, // default is unlimited
 
       // remove lines from the final report containing any of these
       // accepts strings. If you want to stop reporting dozens 
       // of lines that tell you nothing of value
-      removeLinesContaining: ['@angular', 'zone.js'] // default is []
+      removeLinesContaining: ['@angular', 'zone.js'], // default is []
 
       // underline filename of some file type
       // All files in the error report that have this
       // particular extention will be underlined 
-      underlineFileType: 'spec.ts' // default is ''
+      underlineFileType: 'spec.ts', // default is ''
 
       // set custom color options for error report
       // will only work with numbers permitted in
@@ -88,7 +88,10 @@ module.exports = function(config) {
         testName: 0,  // default is 205
         browserName: 123, // default is 199
         firstLine: 255 // default is 211
-      }
+      },
+
+      // hide from the final report the browser involved
+      hideBrowser: true // default is false
     }
   });
 };
