@@ -53,8 +53,9 @@ module.exports = function(config) {
       // suppress the error report at the end of the test run
       suppressErrorReport: true, // default is false
 
-      // suppress the red background on errors in the error
-      // report at the end of the test run
+      // suppress the red background on errors 
+      // in the error report at the end of the test run
+      // any line not containing `node_modules` is highlighted
       suppressErrorHighlighting: true, // default is false
 
       // increase the number of rainbow lines displayed
@@ -87,11 +88,18 @@ module.exports = function(config) {
       colorOptions: {
         testName: 0,  // default is 205
         browserName: 123, // default is 199
-        firstLine: 255 // default is 211
+        firstLine: 225, // default is 211
+        loggedErrors: 255 // default is 217
       },
 
       // hide from the final report the browser involved
-      hideBrowser: true // default is false
+      hideBrowser: true, // default is false
+
+      // remove from the final report 
+      // anything that follows '<-'
+      // for example `blah blah <- test.ts 4250:39`
+      // will become `blah blah`
+      removeTail: true // default is false
     }
   });
 };
