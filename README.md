@@ -70,6 +70,11 @@ module.exports = function(config) {
       // No error occurs if this limit is longer than 
       // the number of lines reported.
       maxLogLines: 5 // default is unlimited
+
+      // remove lines from the final report containing any of these
+      // accepts strings. If you want to stop reporting dozens 
+      // of lines that tell you nothing of value
+      removeLinesContaining: ['@angular', 'zone.js'] // default is []
     }
   });
 };
