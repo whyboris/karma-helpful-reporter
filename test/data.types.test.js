@@ -20,6 +20,7 @@ describe('data/types.js test suite', function() {
     right = 'right>';
 
     clcFake = {
+      'colorTestName': sinon.stub(),
       'white': sinon.stub(),
       'red': sinon.stub(),
       'yellow': sinon.stub(),
@@ -34,6 +35,8 @@ describe('data/types.js test suite', function() {
     };
 
     clcFake.move.right.returns(right);
+
+    clcFake.colorTestName.returns(clcFake.colorTestName);
 
     dt = rewire('../lib/data/types');
     dt.__set__('clc', clcFake);
@@ -133,6 +136,8 @@ describe('data/types.js test suite', function() {
       sut.depth = depth;
       sut.browsers = browsers;
 
+      sut.colorTestName = clcFake.colorTestName;
+
       done();
     });
 
@@ -145,7 +150,6 @@ describe('data/types.js test suite', function() {
     it('should return the expected string when toString is called', function() {
       var actual, expected;
       var redReturn = '\u001b[38;5;199m' + name + '\u001b[39m';
-
       clcFake.red.returns(redReturn);
 
       expected = [

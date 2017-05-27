@@ -15,6 +15,7 @@ describe('printers.js test suite', function() {
   var sut;
   var module;
   var clcFake;
+  var colorConsoleLogsFake;
 
   beforeEach(function(done) {
     clcFake = {
@@ -23,15 +24,18 @@ describe('printers.js test suite', function() {
       'cyan':         sinon.stub(),
       'green':        sinon.stub(),
       'move': {
-        'right':        sinon.stub()
+        'right':      sinon.stub()
       },
       'blackBright':  sinon.stub(),
       'white':        sinon.stub(),
       'yellow':       sinon.stub()
     };
 
+    colorConsoleLogsFake = sinon.stub();
+
     sut = rewire('../lib/util/printers');
     sut.__set__('clc', clcFake);
+    sut.__set__('colorConsoleLogs', colorConsoleLogsFake);
 
     done();
   });
@@ -294,11 +298,11 @@ describe('printers.js test suite', function() {
 
     it('should call write with the expected arguments', function() {
       var msg;
-      clcFake.cyan.returnsArg(0);
+      colorConsoleLogsFake.returnsArg(0);
 
       sut.printBrowserLogs(fakeLogs);
 
-      eq(4, clcFake.cyan.callCount);
+      eq(4, colorConsoleLogsFake.callCount);
 
       msg = ' LOG MESSAGES FOR: browser1 INSTANCE #: 0\n';
       ok(writeFake.getCall(0).calledWithExactly(msg));

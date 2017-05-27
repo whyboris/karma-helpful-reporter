@@ -88,11 +88,12 @@ describe('nyanCat.js test suite', function() {
     };
 
     printersFake = {
-      'write' : sinon.spy(),
+      'printBrowserLogs' : sinon.spy(),
       'printRuntimeErrors' : sinon.spy(),
-      'printTestFailures' : sinon.spy(),
       'printStats' : sinon.spy(),
-      'printBrowserLogs' : sinon.spy()
+      'printTestFailures' : sinon.spy(),
+      'setColorOptions' : sinon.spy(),
+      'write' : sinon.spy()
     };
 
     shellUtilFake = {

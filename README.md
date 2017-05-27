@@ -85,12 +85,12 @@ module.exports = function(config) {
       // set custom color options for error report
       // will only work with numbers permitted in
       // https://github.com/medikoo/cli-color
-      colorOptions: {
-        testName: 0,  // default is 205
-        browserName: 123, // default is 199
-        firstLine: 225, // default is 211
-        loggedErrors: 255 // default is 250
-      },
+      colorBrowser: 0,        // default is 205,
+      colorConsoleLogs: 100,  // default is 45,
+      colorFirstLine: 255,    // default is 211,
+      colorLoggedErrors: 123, // default is 250,
+      colorTestName: 200,     // default is 199,
+      colorUnderline: 42,     // default is 254,
 
       // hide from the final report the browser involved
       hideBrowser: true, // default is false
