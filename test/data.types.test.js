@@ -20,6 +20,7 @@ describe('data/types.js test suite', function() {
     right = 'right>';
 
     clcFake = {
+      'erase': sinon.stub(),
       'colorTestName': sinon.stub(),
       'white': sinon.stub(),
       'red': sinon.stub(),
@@ -41,6 +42,117 @@ describe('data/types.js test suite', function() {
     dt = rewire('../lib/data/types');
     dt.__set__('clc', clcFake);
     done();
+  });
+
+  /**
+   * Individual functions tests
+   */
+  describe('individual functions', function() {
+    var sut, name, suites, tests;
+
+    beforeEach(function(done) {
+      name = 'suite';
+      suites = ['a', 'b', 'c'];
+      tests = [1, 2, 3];
+
+      sut = new dt.Suite(name);
+
+      sut.suites = suites;
+      sut.tests = tests;
+      done();
+    });
+
+    describe('clearScreen()', function() {
+      it('should call clc.erase.screen', function() {
+        var clearFake = {
+          'stdout': {
+            'write': sinon.stub()
+          }
+        };
+        var write = sinon.stub();
+        clearFake.stdout.write.returns(write);
+        dt.__set__('process', clearFake);
+        dt.clearScreen();
+        // fix test
+        // ok(process.calledOnce);
+      });
+    });
+
+    describe('clearScreenBeforeEveryRun()', function() {
+      it('should set clearScreenBeforeEveryRun to true', function() {
+        sut.clearScreenBeforeEveryRun = false;
+        dt.clearScreenBeforeEveryRun();
+        // fix test
+        // expect(sut.clearScreenBeforeEveryRun).to.be.true;
+      });
+    });
+
+    describe('hideBrowser()', function() {
+      it('should set showBrowser to false', function() {
+        sut.showBrowser = true;
+        dt.hideBrowser();
+        // fix test
+        // expect(sut.hideBrowser).to.be.false;
+      });
+    });
+
+    describe('removeTail()', function() {
+      it('should set removeTail to true', function() {
+        sut.removeTail = false;
+        dt.removeTail();
+        // fix test
+        // expect(sut.removeTail).to.be.true;
+      });
+    });
+
+    describe('resetCounter()', function() {
+      it('should set removeTail to true', function() {
+        sut.counter = 33;
+        sut.clearScreenBeforeEveryRun = true;
+        dt.resetCounter();
+        // fix test
+        // expect(sut.counter).to.equal(0);
+      });
+    });
+
+    describe('setColorOptions()', function() {
+      it('should set all color options', function() {
+        var clcFake = {
+          'xterm': sinon.stub(),
+          'underline': {
+            'xterm': sinon.stub()
+          }
+        }
+        dt.__set__('clc', clcFake);
+        dt.setColorOptions({
+          colorBrowser: 44,
+          colorFirstLine: 43,
+          colorLoggedErrors: 2,
+          colorTestName: 135,
+          colorUnderline: 245
+        });
+        // fix this test
+        // ok(clcFake.callCount.eq(5));
+      });
+    });
+
+    describe('HOW DO YOU TEST THIS STUFF???????', function() {
+      it('HOW DO I TEST IF A VARIABLE CHANGED???????', function() {
+        // fake code -- all I want to do is to unit-test these
+        // I want to set a variable to some value, 
+        // run the function
+        // and check that the variable has changed 
+        // but I can't figure out how to do this simple thing!!!
+        dt.setErrorFormatterMethod(function(){});
+        dt.setFileTypeToUnderline('string');
+        dt.setLinesToExclude(['string1','string2']);
+        dt.setMaxLogLines(9);
+        dt.suppressErrorHighlighting();
+
+
+      });
+    });
+
   });
 
   /**
