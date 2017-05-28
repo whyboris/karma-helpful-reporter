@@ -151,11 +151,25 @@ describe('nyanCat.js test suite', function() {
 
       expect(sut).to.contain.keys(defaultPropertyKeys);
       expect(sut.options).to.not.be.an.object;
-      expect(sut.options.suppressErrorReport).to.be.false;
-      expect(sut.options.suppressErrorHighlighting).to.be.false;
-      expect(sut.options.numberOfRainbowLines).to.eq(4);
-      expect(sut.options.renderOnRunCompleteOnly).to.be.false;
+
+      // all the options
+      expect(sut.options.clearScreenBeforeEveryRun).to.be.false;
+      expect(sut.options.colorBrowser).to.eq(205);
+      expect(sut.options.colorConsoleLogs).to.eq(45);
+      expect(sut.options.colorFirstLine).to.eq(211);
+      expect(sut.options.colorLoggedErrors).to.eq(250);
+      expect(sut.options.colorTestName).to.eq(199);
+      expect(sut.options.colorUnderline).to.eq(254);
+      expect(sut.options.hideBrowser).to.be.false;
       expect(sut.options.maxLogLines).to.be.null;
+      expect(sut.options.numberOfRainbowLines).to.eq(4);
+      expect(sut.options.removeLinesContaining).to.be.an.array;
+      expect(sut.options.removeTail).to.be.false;
+      expect(sut.options.renderOnRunCompleteOnly).to.be.false;
+      expect(sut.options.suppressErrorHighlighting).to.be.false;
+      expect(sut.options.suppressErrorReport).to.be.false;
+      expect(sut.options.underlineFileType).to.be.null;
+
       expect(sut.adapterMessages).to.be.an.array;
       expect(sut.adapterMessages).to.be.empty;
       expect(sut.adapters).to.be.an.array;
@@ -170,21 +184,43 @@ describe('nyanCat.js test suite', function() {
 
     it('should set options when passed in via config', function() {
       configFake.nyanReporter = {
-        'suppressErrorReport' : true,
-        'suppressErrorHighlighting' : true,
+        'clearScreenBeforeEveryRun': true,
+        'colorBrowser' : 0,
+        'colorConsoleLogs' : 13,
+        'colorFirstLine' : 42,
+        'colorLoggedErrors' : 111,
+        'colorTestName' : 123,
+        'colorUnderline' : 222,
+        'hideBrowser' : true,
+        'removeLinesContaining' : ['zones.js', '@angular'],
+        'removeTail' : true,
+        'underlineFileType' : 'spec.ts',
+        'maxLogLines' : 9001,
         'numberOfRainbowLines' : 100,
         'renderOnRunCompleteOnly' : true,
-        'maxLogLines' : 9001,
-        'someOtherOption' : 1234
+        'suppressErrorHighlighting' : true,
+        'suppressErrorReport' : true,
+        'someOtherOption' : 1234,
       };
 
       sut = new module.NyanCat(null, formatterFake, configFake);
 
-      expect(sut.options.suppressErrorReport).to.be.true;
-      expect(sut.options.suppressErrorHighlighting).to.be.true;
+      expect(sut.options.clearScreenBeforeEveryRun).to.be.true;
+      expect(sut.options.colorBrowser).to.eq(0);
+      expect(sut.options.colorConsoleLogs).to.eq(13);
+      expect(sut.options.colorFirstLine).to.eq(42);
+      expect(sut.options.colorLoggedErrors).to.eq(111);
+      expect(sut.options.colorTestName).to.eq(123);
+      expect(sut.options.colorUnderline).to.eq(222);
+      expect(sut.options.hideBrowser).to.be.true;
+      expect(sut.options.removeLinesContaining).to.deep.eq(['zones.js', '@angular']);
+      expect(sut.options.removeTail).to.be.true;
+      expect(sut.options.underlineFileType).to.eq('spec.ts');
+      expect(sut.options.maxLogLines).to.eq(9001);
       expect(sut.options.numberOfRainbowLines).to.eq(100);
       expect(sut.options.renderOnRunCompleteOnly).to.be.true;
-      expect(sut.options.maxLogLines).to.eq(9001);
+      expect(sut.options.suppressErrorHighlighting).to.be.true;
+      expect(sut.options.suppressErrorReport).to.be.true;
       expect(sut.options.someOtherOption).to.be.undefined;
     });
 
