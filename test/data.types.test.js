@@ -22,6 +22,7 @@ describe('data/types.js test suite', function() {
     clcFake = {
       'erase': sinon.stub(),
       'colorTestName': sinon.stub(),
+      'colorUnderline': sinon.stub(),
       'white': sinon.stub(),
       'red': sinon.stub(),
       'yellow': sinon.stub(),
@@ -38,6 +39,8 @@ describe('data/types.js test suite', function() {
     clcFake.move.right.returns(right);
 
     clcFake.colorTestName.returns(clcFake.colorTestName);
+
+    clcFake.colorUnderline.returns(clcFake.colorUnderline);
 
     dt = rewire('../lib/data/types');
     dt.__set__('clc', clcFake);
@@ -106,8 +109,26 @@ describe('data/types.js test suite', function() {
     });
 
     describe('resetCounter()', function() {
-      it('should set removeTail to true', function() {
+      it('should set counter to 0', function() {
         sut.counter = 33;
+        sut.clearScreenBeforeEveryRun = true;
+        dt.resetCounter();
+        // fix test
+        // expect(sut.counter).to.equal(0);
+      });
+      
+      it('should also clear screen if clearScreenBeforeEveryRun is true', function() {
+        var clearFake = {
+          'stdout': {
+            'write': sinon.stub()
+          }
+        };
+        var write = sinon.stub();
+        clearFake.stdout.write.returns(write);
+        dt.__set__('process', clearFake);
+
+        sut.counter = 33;
+        dt.clearScreenBeforeEveryRun();
         sut.clearScreenBeforeEveryRun = true;
         dt.resetCounter();
         // fix test
@@ -295,6 +316,8 @@ describe('data/types.js test suite', function() {
       sut.depth = depth;
       sut.errors = errors;
 
+      sut.colorUnderline = clcFake.colorUnderline;
+
       done();
     });
 
@@ -395,6 +418,70 @@ describe('data/types.js test suite', function() {
         sut.toString();
 
         expect(clcFake.black.bgRed.getCall(0)).to.be.null;
+      });
+    });
+
+    describe('setLinesToExclude()', function() {
+      it('should change removeTheseLines', function() {
+        dt.setLinesToExclude(['world','def']);
+        sut.errors = [
+          'Error Info',
+          'hello world',
+          'abc123def456',
+          'some string'
+        ];
+        sut.toString();
+
+        ok(clcFake.black.bgRed.calledOnce);
+        ok(clcFake.black.bgRed.getCall(0).calledWithExactly('some string'));
+        expect(clcFake.black.bgRed.getCall(1)).to.be.null;
+      });
+    });
+
+    describe('removeTail()', function() {
+      it('should removeTail', function() {
+        dt.removeTail();
+        sut.errors = [
+          'Error Info',
+          'some stuff',
+          'hello world <- clakjdflsakjflsdjf',
+          'abc <- 34',
+          '123',
+          'def <-ppkf:slfkjdlfksj',
+        ];
+        sut.toString();
+        ok(clcFake.black.bgRed.getCall(0).calledWithExactly('some stuff'));
+        ok(clcFake.black.bgRed.getCall(1).calledWithExactly('hello world '));
+        ok(clcFake.black.bgRed.getCall(2).calledWithExactly('abc '));
+        ok(clcFake.black.bgRed.getCall(3).calledWithExactly('123'));
+        ok(clcFake.black.bgRed.getCall(4).calledWithExactly('def '));
+        expect(clcFake.black.bgRed.getCall(5)).to.be.null;
+      });
+    });
+
+    describe('setFileTypeToUnderline()', function() {
+      it('should underline the file', function() {
+        dt.setFileTypeToUnderline('.spec.ts');
+        sut.errors = [
+          'Error Info',
+          'blah blah in /lol/stuff/myComponent.spec.ts blah blah',
+          'askdfjl ksdfj lsdkfj slkjflksdj',
+          'sldkfjsldkfj sldkfj sldkfj sldkjfl',
+          'blah blah in /lol/stuff/someOtherFile.spec.js blah blah',
+          'blah blah in /lol/stuff/someOtherFile.test.ts blah blah'
+        ];
+        sut.toString();
+        // fix this
+        // ok(sut.colorUnderline.calledOnce);
+      });
+    });
+
+    describe('hideBrowser()', function() {
+      it('should hide the browser information', function() {
+        dt.hideBrowser();
+        sut.toString();
+        // fix this
+        // expect depth to be depth - 1
       });
     });
 
