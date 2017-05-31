@@ -83,38 +83,33 @@ describe('data/types.js test suite', function() {
 
     describe('clearScreenBeforeEveryRun()', function() {
       it('should set clearScreenBeforeEveryRun to true', function() {
-        sut.clearScreenBeforeEveryRun = false;
+        dt.__set__("clearScreenBeforeEveryRun", false);
         dt.clearScreenBeforeEveryRun();
-        // fix test
-        // expect(sut.clearScreenBeforeEveryRun).to.be.true;
+        expect(dt.__get__("clearScreenBeforeEveryRun")).to.be.true;
       });
     });
 
     describe('hideBrowser()', function() {
       it('should set showBrowser to false', function() {
-        sut.showBrowser = true;
+        dt.__set__("showBrowser", true);
         dt.hideBrowser();
-        // fix test
-        // expect(sut.hideBrowser).to.be.false;
+        expect(dt.__get__("showBrowser")).to.be.false;
       });
     });
 
     describe('removeTail()', function() {
       it('should set removeTail to true', function() {
-        sut.removeTail = false;
+        dt.__set__("removeTail", false);
         dt.removeTail();
-        // fix test
-        // expect(sut.removeTail).to.be.true;
+        expect(dt.__get__("removeTail")).to.be.true;
       });
     });
 
     describe('resetCounter()', function() {
       it('should set counter to 0', function() {
-        sut.counter = 33;
-        sut.clearScreenBeforeEveryRun = true;
+        dt.__set__("counter", 33);
         dt.resetCounter();
-        // fix test
-        // expect(sut.counter).to.equal(0);
+        expect(dt.__get__("counter")).to.equal(0);
       });
       
       it('should also clear screen if clearScreenBeforeEveryRun is true', function() {
@@ -127,12 +122,9 @@ describe('data/types.js test suite', function() {
         clearFake.stdout.write.returns(write);
         dt.__set__('process', clearFake);
 
-        sut.counter = 33;
         dt.clearScreenBeforeEveryRun();
-        sut.clearScreenBeforeEveryRun = true;
         dt.resetCounter();
-        // fix test
-        // expect(sut.counter).to.equal(0);
+        ok(dt.__get__('process').stdout.write.calledOnce);
       });
     });
 
@@ -152,25 +144,40 @@ describe('data/types.js test suite', function() {
           colorTestName: 135,
           colorUnderline: 245
         });
-        // fix this test
-        // ok(clcFake.callCount.eq(5));
+        ok(dt.__get__('clc').xterm.callCount === 4);
+        ok(dt.__get__('clc').underline.xterm.callCount === 1);
       });
     });
 
-    describe('HOW DO YOU TEST THIS STUFF???????', function() {
-      it('HOW DO I TEST IF A VARIABLE CHANGED???????', function() {
-        // fake code -- all I want to do is to unit-test these
-        // I want to set a variable to some value, 
-        // run the function
-        // and check that the variable has changed 
-        // but I can't figure out how to do this simple thing!!!
-        dt.setErrorFormatterMethod(function(){});
-        dt.setFileTypeToUnderline('string');
+    describe('setFileTypeToUnderline()', function() {
+      it('should update the fileExtension variable', function() {
+        dt.__set__("fileExtension", "some string");
+        dt.setFileTypeToUnderline(".spec.ts");
+        expect(dt.__get__("fileExtension")).to.eq(".spec.ts");
+      });
+    });
+
+    describe('setLinesToExclude()', function() {
+      it('should update removeTheseLines array', function() {
+        dt.__set__("removeTheseLines", ['a','b','c']);
         dt.setLinesToExclude(['string1','string2']);
+        assert.deepEqual(dt.__get__("removeTheseLines"), ['string1','string2']);
+      });
+    });
+
+    describe('setMaxLogLines()', function() {
+      it('should update maxLines variable', function() {
+        dt.__set__("maxLines", 3);
         dt.setMaxLogLines(9);
+        expect(dt.__get__("maxLines")).to.eq(9);
+      });
+    });
+
+    describe('suppressErrorHighlighting()', function() {
+      it('should set errorHighlightingEnable to false', function() {
+        dt.__set__("errorHighlightingEnabled", true);
         dt.suppressErrorHighlighting();
-
-
+        expect(dt.__get__("errorHighlightingEnabled")).to.be.false;
       });
     });
 
