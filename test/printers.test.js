@@ -28,7 +28,8 @@ describe('printers.js test suite', function() {
       },
       'blackBright':  sinon.stub(),
       'white':        sinon.stub(),
-      'yellow':       sinon.stub()
+      'yellow':       sinon.stub(),
+      'xterm':        sinon.stub()
     };
 
     colorConsoleLogsFake = sinon.stub();
@@ -45,6 +46,14 @@ describe('printers.js test suite', function() {
     module = null;
     clcFake = null;
     done();
+  });
+
+  
+  describe('setColorOptions()', function() {
+    it('should set color of console logs', function() {
+      sut.setColorOptions({"colorConsoleLogs": 99});
+      ok(sut.__get__('clc').xterm.callCount === 1);
+    });
   });
 
   /**

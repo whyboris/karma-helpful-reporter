@@ -165,6 +165,15 @@ describe('data/store.js - test suite', function() {
 
       assert.deepEqual(expected, brwsr.errors);
     });
+
+    it('should create brwsr.errors from result.log when there are more errors', function() {
+      result.log = ['failure01\nfailure02','failure03\nfailure04'];
+      var expected = ['failure01', 'failure02', 'failure03', 'failure04'];
+
+      sut.saveResultToSuite(suite, browser, result);
+
+      assert.deepEqual(expected, brwsr.errors);
+    });
   });
 
   /**
