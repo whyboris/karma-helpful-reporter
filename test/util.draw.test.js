@@ -99,6 +99,7 @@ describe('util/draw.js test suite', function() {
         'rainbowify' : sinon.stub()
       };
 
+      rainbowifierFake.rainbowify.withArgs('‾').returns('‾');
       rainbowifierFake.rainbowify.withArgs('-').returns('-');
       rainbowifierFake.rainbowify.withArgs('_').returns('_');
       done();
@@ -113,16 +114,16 @@ describe('util/draw.js test suite', function() {
       sut.appendRainbow(rainbowifierFake);
 
       expect(rainbowifierFake.rainbowify.calledOnce).to.be.true;
-      expect(rainbowifierFake.rainbowify.calledWithExactly('-')).to.be.true;
+      expect(rainbowifierFake.rainbowify.calledWithExactly('‾')).to.be.true;
       expect(sut.trajectories.length).to.eq(4);
       expect(sut.trajectories[0].length).to.eq(1);
       expect(sut.trajectories[1].length).to.eq(1);
       expect(sut.trajectories[2].length).to.eq(1);
       expect(sut.trajectories[3].length).to.eq(1);
-      expect(sut.trajectories[0][0]).to.eq('-');
-      expect(sut.trajectories[1][0]).to.eq('-');
-      expect(sut.trajectories[2][0]).to.eq('-');
-      expect(sut.trajectories[3][0]).to.eq('-');
+      expect(sut.trajectories[0][0]).to.eq('‾');
+      expect(sut.trajectories[1][0]).to.eq('‾');
+      expect(sut.trajectories[2][0]).to.eq('‾');
+      expect(sut.trajectories[3][0]).to.eq('‾');
 
       sut.tick = true;
       sut.appendRainbow(rainbowifierFake);
@@ -133,10 +134,38 @@ describe('util/draw.js test suite', function() {
       expect(sut.trajectories[1].length).to.eq(2);
       expect(sut.trajectories[2].length).to.eq(2);
       expect(sut.trajectories[3].length).to.eq(2);
-      expect(sut.trajectories[0][1]).to.eq('_');
-      expect(sut.trajectories[1][1]).to.eq('_');
-      expect(sut.trajectories[2][1]).to.eq('_');
-      expect(sut.trajectories[3][1]).to.eq('_');
+      expect(sut.trajectories[0][1]).to.eq('-');
+      expect(sut.trajectories[1][1]).to.eq('-');
+      expect(sut.trajectories[2][1]).to.eq('-');
+      expect(sut.trajectories[3][1]).to.eq('-');
+
+      sut.tick = false;
+      sut.appendRainbow(rainbowifierFake);
+
+      expect(rainbowifierFake.rainbowify.calledWithExactly('-')).to.be.true;
+      expect(sut.trajectories.length).to.eq(4);
+      expect(sut.trajectories[0].length).to.eq(3);
+      expect(sut.trajectories[1].length).to.eq(3);
+      expect(sut.trajectories[2].length).to.eq(3);
+      expect(sut.trajectories[3].length).to.eq(3);
+      expect(sut.trajectories[0][2]).to.eq('-');
+      expect(sut.trajectories[1][2]).to.eq('-');
+      expect(sut.trajectories[2][2]).to.eq('-');
+      expect(sut.trajectories[3][2]).to.eq('-');
+
+      sut.tick = true;
+      sut.appendRainbow(rainbowifierFake);
+
+      expect(rainbowifierFake.rainbowify.calledWithExactly('_')).to.be.true;
+      expect(sut.trajectories.length).to.eq(4);
+      expect(sut.trajectories[0].length).to.eq(4);
+      expect(sut.trajectories[1].length).to.eq(4);
+      expect(sut.trajectories[2].length).to.eq(4);
+      expect(sut.trajectories[3].length).to.eq(4);
+      expect(sut.trajectories[0][3]).to.eq('_');
+      expect(sut.trajectories[1][3]).to.eq('_');
+      expect(sut.trajectories[2][3]).to.eq('_');
+      expect(sut.trajectories[3][3]).to.eq('_');
     });
 
     it('should not allow trajectories sub-arrays length to exceed trajectoryWidthMax', function() {
