@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/whyboris/karma-helpful-reporter.svg)](https://travis-ci.org/whyboris/karma-helpful-reporter)
 [![Coverage Status](https://coveralls.io/repos/github/whyboris/karma-helpful-reporter/badge.svg?branch=karma-helpful-reporter)](https://coveralls.io/github/whyboris/karma-helpful-reporter?branch=karma-helpful-reporter)
 [![Code Climate](https://codeclimate.com/github/whyboris/karma-helpful-reporter/badges/gpa.svg)](https://codeclimate.com/github/whyboris/karma-helpful-reporter)
+[![Dependency Status](https://david-dm.org/whyboris/karma-helpful-reporter.svg)](https://david-dm.org/whyboris/karma-helpful-reporter)
 
 karma-helpful-reporter
 ===
