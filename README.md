@@ -46,19 +46,19 @@ Setup & Options
 // karma.conf.js
 module.exports = function(config) {
   config.set({
-    // ...
+     ...
     plugins: [
-    // ...
+     ...
       require('karma-helpful-reporter'),
-    // ...
+     ...
     ],
-    // ...
+     ...
     reporters: [
-    // ...
+     ...
       'helpful'
-    // ...
+     ...
     ],
-    // ...
+     ...
 
     // Optional reporter settings
     helpfulReporter: {
@@ -84,19 +84,19 @@ module.exports = function(config) {
 
 Property | Default | Description
 --- | --- | ---
-clearScreenBeforeEveryRun | false | clear screen after every run happens before the Nyan cat is rendered
-hideBrowser | false | hide from the final report the browser involved
-maxLogLines | 42 | limit the number of lines of error shown No error occurs if this limit is longer than  the number of lines reported
-removeLinesContaining | [] | remove lines from the final report containing any of these accepts strings. If you want to stop reporting dozens  of lines that tell you nothing of value, for example | ['@angular', 'zone.js']
-removeTail | false | remove from the final report  anything that follows '<-' for example `blah blah <- test.ts 4250:39` will become `blah blah`
-renderOnRunCompleteOnly | false | only render the graphic after all tests have finished. This is ideal for using this reporter in a continuous integration environment
-suppressErrorHighlighting | false |  suppress the red background on errors in the error report at the end of the test run any line not containing `node_modules` is highlighted
-suppressErrorReport | false | suppress the error report at the end of the test run
-underlineFileType | '' | underline filename of some file type All files in the error report that have this particular extention will be underlined  fer example | 'spec.ts'
-colorBrowser | 205 |  set custom color options for error report will only work with numbers permitted in htgithub.com/medikoo/cli-color
-colorConsoleLogs | 45 | ^
-colorFirstLine | 211 | ^
-colorLoggedErrors | 250 | ^
-colorTestName | 199 | ^
-colorUnderline | 254 | ^
+clearScreenBeforeEveryRun | false | Clear screen before every run
+hideBrowser | true | Hide browser name from the report
+maxLogLines | 42 | Limit the maximum number of lines in report
+removeLinesContaining | [] | Remove all lines from the final report containing any of these strings, e.g. _['@angular', 'zone.js']_
+removeTail | false | Remove from the final report anything that follows '<-', e.g. _blah blah <- test.ts 4250:39_ becomes _blah blah_
+renderOnRunCompleteOnly | false | Do not animate while tests are running
+suppressErrorHighlighting | false | Highlight in red all lines not containing _node_modules_
+suppressErrorReport | false | Suppress the error report at the end of the test run
+underlineFileType | '' | Underline filename of some file type; all files in the error report that have this particular extention will be underlined, e.g. _'spec.ts'_
+colorBrowser | 205 | <img src="http://medyk.org/colors/ff5faf.png" style="border: 1px solid black" width="20" height="20" /> 
+colorConsoleLogs | 45 | <img src="http://medyk.org/colors/00d7ff.png" style="border: 1px solid black" width="20" height="20" />
+colorFirstLine | 211 | <img src="http://medyk.org/colors/ff87af.png" style="border: 1px solid black" width="20" height="20" />
+colorLoggedErrors | 250 | <img src="http://medyk.org/colors/bcbcbc.png" style="border: 1px solid black" width="20" height="20" />
+colorTestName | 199 | <img src="http://medyk.org/colors/ff00af.png" style="border: 1px solid black" width="20" height="20" />
+colorUnderline | 254 | <img src="http://medyk.org/colors/e4e4e4.png" style="border: 1px solid black" width="20" height="20" /> Set custom color options for error report will only work with numbers permitted in [cli-color](https://github.com/medikoo/cli-color)
 
