@@ -1,6 +1,6 @@
 [![npm version](https://badge.fury.io/js/karma-helpful-reporter.svg)](http://badge.fury.io/js/karma-helpful-reporter)
 [![Build Status](https://travis-ci.org/whyboris/karma-helpful-reporter.svg)](https://travis-ci.org/whyboris/karma-helpful-reporter)
-[![Coverage Status](https://coveralls.io/repos/whyboris/karma-helpful-reporter/badge.svg?branch=master)](https://coveralls.io/r/whyboris/karma-helpful-reporter?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/whyboris/karma-helpful-reporter/badge.svg?branch=karma-helpful-reporter)](https://coveralls.io/github/whyboris/karma-helpful-reporter?branch=karma-helpful-reporter)
 [![Code Climate](https://codeclimate.com/github/whyboris/karma-helpful-reporter/badges/gpa.svg)](https://codeclimate.com/github/whyboris/karma-helpful-reporter)
 
 karma-helpful-reporter
@@ -98,5 +98,7 @@ colorConsoleLogs | 45 | <img src="http://medyk.org/colors/00d7ff.png" style="bor
 colorFirstLine | 211 | <img src="http://medyk.org/colors/ff87af.png" style="border: 1px solid black" width="20" height="20" />
 colorLoggedErrors | 250 | <img src="http://medyk.org/colors/bcbcbc.png" style="border: 1px solid black" width="20" height="20" />
 colorTestName | 199 | <img src="http://medyk.org/colors/ff00af.png" style="border: 1px solid black" width="20" height="20" />
-colorUnderline | 254 | <img src="http://medyk.org/colors/e4e4e4.png" style="border: 1px solid black" width="20" height="20" /> Set custom color options for error report will only work with numbers permitted in [cli-color](https://github.com/medikoo/cli-color)
+colorUnderline | 254 | <img src="http://medyk.org/colors/e4e4e4.png" style="border: 1px solid black" width="20" height="20" />
+
+Set custom colors by using permitted [cli-color](https://github.com/medikoo/cli-color) numbers.
 
