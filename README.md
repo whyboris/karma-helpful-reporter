@@ -1,114 +1,102 @@
-[![npm version](https://badge.fury.io/js/karma-nyan-reporter.svg)](http://badge.fury.io/js/karma-nyan-reporter)
-[![Build Status](https://travis-ci.org/dgarlitt/karma-nyan-reporter.svg)](https://travis-ci.org/dgarlitt/karma-nyan-reporter)
-[![Coverage Status](https://coveralls.io/repos/dgarlitt/karma-nyan-reporter/badge.svg?branch=master)](https://coveralls.io/r/dgarlitt/karma-nyan-reporter?branch=master)
-[![Code Climate](https://codeclimate.com/github/dgarlitt/karma-nyan-reporter/badges/gpa.svg)](https://codeclimate.com/github/dgarlitt/karma-nyan-reporter)
-<!-- [![Dependency Status](https://david-dm.org/dgarlitt/karma-nyan-reporter.svg)](https://david-dm.org/dgarlitt/karma-nyan-reporter) -->
+[![npm version](https://badge.fury.io/js/karma-helpful-reporter.svg)](http://badge.fury.io/js/karma-helpful-reporter)
+[![Build Status](https://travis-ci.org/whyboris/karma-helpful-reporter.svg)](https://travis-ci.org/whyboris/karma-helpful-reporter)
+[![Coverage Status](https://coveralls.io/repos/whyboris/karma-helpful-reporter/badge.svg?branch=master)](https://coveralls.io/r/whyboris/karma-helpful-reporter?branch=master)
+[![Code Climate](https://codeclimate.com/github/whyboris/karma-helpful-reporter/badges/gpa.svg)](https://codeclimate.com/github/whyboris/karma-helpful-reporter)
 
-karma-nyan-reporter
-===================
+karma-helpful-reporter
+===
 
-Nyan Cat style reporter originally cobbled together from the [Mocha](http://visionmedia.github.io/mocha/) version
+Karma Helpful Reporter was copied from [karma-nyan-reporter](https://github.com/dgarlitt/karma-nyan-reporter/) in July 2017 with intent to build on and improve its functionality. 
 
-![Karma Nyan Cat Reporter for Karma](https://raw.githubusercontent.com/dgarlitt/image-repo/master/karma-nyan-reporter/v0.2.2/karma-nyan-reporter.gif "Karma Nyan Cat Reporter for Karma")
+_Screenshot coming soon_
 
 Installation
-========
+===
 
-Installation is simple using npm, just run the following command:
-
-```sh
-npm install --save-dev karma-nyan-reporter
-```
-
-Since this follows Karma's plugin naming convention, that's all there is to it!
-
-Now, run your tests and enjoy:
+Install with npm:
 
 ```sh
-karma start path/to/karma.conf.js --reporters nyan
+npm install --save-dev karma-helpful-reporter
 ```
 
-Error and Logging Output
-=========
+This package follows Karma's plugin naming convention; you can run your tests thus:
 
-Here is a screenshot of the error and logging output. The errors are displayed hierarchically based on the test suite and nesting level. ```console.log()``` messages are output at the bottom (in blue) below the test summary and grouped by browser.
+```sh
+karma start path/to/karma.conf.js --reporters helpful
+```
 
-![Karma Nyan Cat Reporter Error Output](https://raw.githubusercontent.com/dgarlitt/image-repo/master/karma-nyan-reporter/v0.2.2/karma-nyan-reporter-error-output.png "Karma Nyan Cat Reporter Error Output")
+Output
+===
 
-Options
-=========
+The errors from failed tests are displayed hierarchically based on the test suite and nesting level. `console.log()` messages are output at the bottom below the test summary and grouped by browser.
 
-If you want to suppress the stack trace at the end of the test run you can use the suppressErrorReport option.
+_Screenshot coming soon_
+
+Setup & Options
+===
+
+*Setup*: Inside your `karma.conf.js` 
+ - include `require('karma-helpful-reporter'),` inside the `plugins` array
+ - include `'helpful'` inside the `reporters` array
+
+*Options*: optionally, add the `helpfulReporter` object with as many properties from the below set as you'd like.
+ - The listed properties' values are the default ones
 
 ```js
 // karma.conf.js
 module.exports = function(config) {
   config.set({
-    // normal config stuffs
+    // ...
+    plugins: [
+    // ...
+      require('karma-helpful-reporter'),
+    // ...
+    ],
+    // ...
+    reporters: [
+    // ...
+      'helpful'
+    // ...
+    ],
+    // ...
 
-    reporters: ['nyan'],
-
-    // reporter options
-    nyanReporter: {
-      // suppress the error report at the end of the test run
-      suppressErrorReport: true, // default is false
-
-      // suppress the red background on errors 
-      // in the error report at the end of the test run
-      // any line not containing `node_modules` is highlighted
-      suppressErrorHighlighting: true, // default is false
-
-      // increase the number of rainbow lines displayed
-      // enforced min = 4, enforced max = terminal height - 1
-      numberOfRainbowLines: 100, // default is 4
-
-      // only render the graphic after all tests have finished.
-      // This is ideal for using this reporter in a continuous
-      // integration environment.
-      renderOnRunCompleteOnly: true, // default is false
-
-      // limit the number of lines of error shown
-      // No error occurs if this limit is longer than 
-      // the number of lines reported.
-      maxLogLines: 5, // default is 9999
-
-      // remove lines from the final report containing any of these
-      // accepts strings. If you want to stop reporting dozens 
-      // of lines that tell you nothing of value
-      removeLinesContaining: ['@angular', 'zone.js'], // default is []
-
-      // underline filename of some file type
-      // All files in the error report that have this
-      // particular extention will be underlined 
-      underlineFileType: 'spec.ts', // default is ''
-
-      // set custom color options for error report
-      // will only work with numbers permitted in
-      // https://github.com/medikoo/cli-color
-      colorBrowser: 0,        // default is 205,
-      colorConsoleLogs: 100,  // default is 45,
-      colorFirstLine: 255,    // default is 211,
-      colorLoggedErrors: 123, // default is 250,
-      colorTestName: 200,     // default is 199,
-      colorUnderline: 42,     // default is 254,
-
-      // hide from the final report the browser involved
-      hideBrowser: true, // default is false
-
-      // remove from the final report 
-      // anything that follows '<-'
-      // for example `blah blah <- test.ts 4250:39`
-      // will become `blah blah`
-      removeTail: true, // default is false
-
-      // clear screen after every run
-      // happens before the Nyan cat is rendered
-      clearScreenBeforeEveryRun: true; // default is false
+    // Optional reporter settings
+    helpfulReporter: {
+      clearScreenBeforeEveryRun: false,
+      hideBrowser: false,
+      maxLogLines: 42,
+      removeLinesContaining: [],
+      removeTail: false,
+      renderOnRunCompleteOnly: false,
+      suppressErrorHighlighting: false,
+      suppressErrorReport: false,
+      underlineFileType: '',
+      colorBrowser: 205,
+      colorConsoleLogs: 45,
+      colorFirstLine: 211,
+      colorLoggedErrors: 250,
+      colorTestName: 199,
+      colorUnderline: 254,
     }
   });
 };
 ```
 
-In this release
------------
- - Fix for [issue #23](https://github.com/dgarlitt/karma-nyan-reporter/issues/23) - Total tests count is different from other reporters
+Property | Default | Description
+--- | --- | ---
+clearScreenBeforeEveryRun | false | clear screen after every run happens before the Nyan cat is rendered
+hideBrowser | false | hide from the final report the browser involved
+maxLogLines | 42 | limit the number of lines of error shown No error occurs if this limit is longer than  the number of lines reported
+removeLinesContaining | [] | remove lines from the final report containing any of these accepts strings. If you want to stop reporting dozens  of lines that tell you nothing of value, for example | ['@angular', 'zone.js']
+removeTail | false | remove from the final report  anything that follows '<-' for example `blah blah <- test.ts 4250:39` will become `blah blah`
+renderOnRunCompleteOnly | false | only render the graphic after all tests have finished. This is ideal for using this reporter in a continuous integration environment
+suppressErrorHighlighting | false |  suppress the red background on errors in the error report at the end of the test run any line not containing `node_modules` is highlighted
+suppressErrorReport | false | suppress the error report at the end of the test run
+underlineFileType | '' | underline filename of some file type All files in the error report that have this particular extention will be underlined  fer example | 'spec.ts'
+colorBrowser | 205 |  set custom color options for error report will only work with numbers permitted in htgithub.com/medikoo/cli-color
+colorConsoleLogs | 45 | ^
+colorFirstLine | 211 | ^
+colorLoggedErrors | 250 | ^
+colorTestName | 199 | ^
+colorUnderline | 254 | ^
+

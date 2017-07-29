@@ -1,12 +1,12 @@
 {
-    "author": "Daniel Arlitt <dgarlitt@yahoo.com>",
+    "author": "Boris Yakubchik <yboris@yahoo.com>",
     "bugs": {
-        "url": "https://github.com/dgarlitt/karma-nyan-reporter/issues"
+        "url": "https://github.com/whyboris/karma-helpful-reporter/issues"
     },
     "dependencies": {
         "cli-color": "^1.2.0"
     },
-    "description": "Karma reporter with Nyan Cat style logging.",
+    "description": "Karma reporter with helpful style logging.",
     "devDependencies": {
         "chai": "^3.5.0",
         "coveralls": "^2.13.1",
@@ -19,30 +19,28 @@
     },
     "keywords": [
         "karma-plugin",
-        "karma-reporter",
-        "nyan",
-        "cat"
+        "karma-reporter"
     ],
     "license": "MIT",
     "main": "index.js",
     "maintainers": [
         {
-            "email": "dgarlitt@yahoo.com",
-            "name": "Daniel Arlitt"
+            "email": "yboris@yahoo.com",
+            "name": "Boris Yakubchik"
         }
     ],
-    "name": "karma-nyan-reporter",
+    "name": "karma-helpful-reporter",
     "peerDependencies": {
         "karma": ">=0.9"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/dgarlitt/karma-nyan-reporter.git"
+        "url": "https://github.com/whyboris/karma-helpful-reporter.git"
     },
     "scripts": {
         "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
         "test": "./node_modules/mocha/bin/mocha -R spec ./test/*",
         "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec  ./test/*"
     },
-    "version": "0.2.5"
+    "version": "0.3.0"
 }
