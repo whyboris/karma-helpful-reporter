@@ -141,7 +141,7 @@ describe('nyanCat.js test suite', function() {
       expect(sut.options.colorLoggedErrors).to.eq(250);
       expect(sut.options.colorTestName).to.eq(199);
       expect(sut.options.colorUnderline).to.eq(254);
-      expect(sut.options.hideBrowser).to.be.false;
+      expect(sut.options.hideBrowser).to.be.true;
       expect(sut.options.maxLogLines).to.be.null;
       expect(sut.options.removeLinesContaining).to.be.an.array;
       expect(sut.options.removeTail).to.be.false;
@@ -182,7 +182,7 @@ describe('nyanCat.js test suite', function() {
         'someOtherOption' : 1234,
       };
 
-      sut = new module.NyanCat(null, formatterFake, configFake);
+      sut = new module.Helpful(null, formatterFake, configFake);
 
       expect(sut.options.clearScreenBeforeEveryRun).to.be.true;
       expect(sut.options.colorBrowser).to.eq(0);
@@ -207,7 +207,7 @@ describe('nyanCat.js test suite', function() {
         'suppressErrorHighlighting' : true
       };
 
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
 
       expect(dataTypesFake.suppressErrorHighlighting.calledOnce).to.be.true;
     });
@@ -217,7 +217,7 @@ describe('nyanCat.js test suite', function() {
         'maxLogLines' : 15
       };
 
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
 
       expect(dataTypesFake.setMaxLogLines.calledOnce).to.be.true;
     });
@@ -232,7 +232,7 @@ describe('nyanCat.js test suite', function() {
     var props;
 
     beforeEach(function(done) {
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
 
       props = {
         '_browsers' : [],
@@ -285,9 +285,9 @@ describe('nyanCat.js test suite', function() {
     var resetSpy;
 
     beforeEach(function(done) {
-      resetSpy = sinon.spy(module.NyanCat.prototype, 'reset');
+      resetSpy = sinon.spy(module.Helpful.prototype, 'reset');
 
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
 
       done();
     });
@@ -344,7 +344,7 @@ describe('nyanCat.js test suite', function() {
       log1 = 'log message 1';
       log2 = 'log message 2';
 
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
       sut.browser_logs = {};
 
       done();
@@ -408,7 +408,7 @@ describe('nyanCat.js test suite', function() {
 
       result = {};
 
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
       sut._browsers = [];
       sut.dataStore = dataStoreInstanceFake;
       sut.draw = sinon.spy();
@@ -460,7 +460,7 @@ describe('nyanCat.js test suite', function() {
 
   describe('onRunComplete method tests', function() {
     beforeEach(function(done) {
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
       sut.draw = sinon.spy();
       sut.browserErrors = [];
       sut.drawUtil = drawUtilInstanceFake;
@@ -515,7 +515,7 @@ describe('nyanCat.js test suite', function() {
       var browser1 = 'browser1';
       var browser2 = 'browser2';
 
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
       sut._browsers = [];
       sut.numberOfBrowsers = 0;
 
@@ -540,7 +540,7 @@ describe('nyanCat.js test suite', function() {
       var browser = 'browser';
       var error = 'error';
 
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
       sut.browserErrors = [];
 
       sut.onBrowserError(browser, error);
@@ -557,7 +557,7 @@ describe('nyanCat.js test suite', function() {
     var util;
 
     beforeEach(function(done) {
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
       util = sut.drawUtil = drawUtilInstanceFake;
       done();
     });

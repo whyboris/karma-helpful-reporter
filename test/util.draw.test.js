@@ -120,7 +120,7 @@ describe('util/draw.js test suite', function() {
       clcFake.red.withArgs(stats.failed).returns('red>' + stats.failed);
       clcFake.cyan.withArgs(stats.skipped).returns('cyan>' + stats.skipped);
 
-      sut.drawScoreboard(stats);
+      sut.drawChart(stats);
       done();
     });
 
@@ -178,42 +178,6 @@ describe('util/draw.js test suite', function() {
     });
   });
 
-  /**
-   * drawNyanCat() tests
-   */
-
-  describe('drawNyanCat method tests', function() {
-    it('should call the write and cursorUp as expected', function() {
-      var write = fakeWrite;
-      var face = 'face';
-      var stats = 'stats';
-      var color = '\u001b[' + (sut.scoreboardWidth + sut.trajectories[0].length) + 'C';
-
-      sut.face = sinon.stub();
-      sut.face.withArgs(stats).returns(face);
-      sut.cursorUp = sinon.spy();
-      sut.drawNyanCat(stats);
-
-      expect(write.callCount).to.eq(12);
-      expect(sut.cursorUp.calledOnce).to.be.true;
-
-      expect(write.getCall(0).args[0]).to.eq(color);
-      expect(write.getCall(1).args[0]).to.eq('_,------,');
-      expect(write.getCall(2).args[0]).to.eq('\n');
-
-      expect(write.getCall(3).args[0]).to.eq(color);
-      expect(write.getCall(4).args[0]).to.eq('_|   /\\_/\\ ');
-      expect(write.getCall(5).args[0]).to.eq('\n');
-
-      expect(write.getCall(6).args[0]).to.eq(color);
-      expect(write.getCall(7).args[0]).to.eq('^|__' + face + ' ');
-      expect(write.getCall(8).args[0]).to.eq('\n');
-
-      expect(write.getCall(9).args[0]).to.eq(color);
-      expect(write.getCall(10).args[0]).to.eq('  ""  "" ');
-      expect(write.getCall(11).args[0]).to.eq('\n');
-    });
-  });
 
   /**
    * face() tests
