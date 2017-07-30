@@ -34,8 +34,7 @@ describe('nyanCat.js test suite', function() {
       'drawScoreboard' : sinon.spy(),
       'drawRainbow' : sinon.spy(),
       'drawNyanCat' : sinon.spy(),
-      'tick' : true,
-      'fillWithNewlines' : sinon.spy()
+      'tick' : true
     };
 
     drawUtilFake = {
@@ -486,9 +485,6 @@ describe('nyanCat.js test suite', function() {
       var duif = drawUtilInstanceFake;
 
       sut.onRunComplete();
-
-      ok(duif.fillWithNewlines.calledOnce);
-      ok(duif.fillWithNewlines.calledWithExactly());
 
       ok(printersFake.printTestFailures.calledOnce);
       ok(printersFake.printTestFailures

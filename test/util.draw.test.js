@@ -110,8 +110,6 @@ describe('util/draw.js test suite', function() {
         'skipped': 99
       };
 
-      sut.fillWithNewlines = sinon.stub();
-
       numOfLns = 111;
 
       sut.cursorUp = sinon.spy();
@@ -149,11 +147,6 @@ describe('util/draw.js test suite', function() {
 
       expected = ' cyan>' + stats.skipped + '\n';
       ok(fakeWrite.getCall(3).calledWithExactly(expected));
-    });
-
-    it('should call fillWithNewlines once with the expected value', function() {
-      ok(sut.fillWithNewlines.calledOnce);
-      ok(sut.fillWithNewlines.calledWithExactly(5));
     });
 
     it('should call cursorUp with numberOfLines', function() {
@@ -265,17 +258,4 @@ describe('util/draw.js test suite', function() {
     });
   });
 
-  /**
-   * fillWithNewlines() tests
-   */
-
-  describe('fillWithNewlines method tests', function() {
-    it('should draw a newline character the expected number of times', function() {
-      sut.fillWithNewlines();
-      eq(5, fakeWrite.callCount);
-      for(var i = 0; i < fakeWrite.callCount; i++) {
-        ok(fakeWrite.getCall(i).calledWithExactly('\n'));
-      }
-    });
-  });
 });
