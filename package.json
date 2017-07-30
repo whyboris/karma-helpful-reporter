@@ -1,46 +1,46 @@
 {
-    "author": "Boris Yakubchik <yboris@yahoo.com>",
-    "bugs": {
-        "url": "https://github.com/whyboris/karma-helpful-reporter/issues"
-    },
-    "dependencies": {
-        "cli-color": "^1.2.0"
-    },
-    "description": "Karma reporter with helpful style logging.",
-    "devDependencies": {
-        "chai": "4.1.0",
-        "coveralls": "2.13.1",
-        "istanbul": "0.4.5",
-        "mocha": "3.4.2",
-        "mocha-lcov-reporter": "1.3.0",
-        "rewire": "2.5.2",
-        "sinon": "2.4.1",
-        "sinon-chai": "2.12.0"
-    },
-    "keywords": [
-        "karma-plugin",
-        "karma-reporter"
-    ],
-    "license": "MIT",
-    "main": "index.js",
-    "maintainers": [
-        {
-            "email": "yboris@yahoo.com",
-            "name": "Boris Yakubchik"
-        }
-    ],
-    "name": "karma-helpful-reporter",
-    "peerDependencies": {
-        "karma": ">=0.9"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/whyboris/karma-helpful-reporter.git"
-    },
-    "scripts": {
-        "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
-        "test": "./node_modules/mocha/bin/mocha -R spec ./test/*",
-        "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec  ./test/*"
-    },
-    "version": "0.3.0"
+  "author": "Boris Yakubchik <yboris@yahoo.com>",
+  "bugs": {
+    "url": "https://github.com/whyboris/karma-helpful-reporter/issues"
+  },
+  "dependencies": {
+    "cli-color": "^1.2.0"
+  },
+  "description": "Karma reporter with helpful style logging.",
+  "devDependencies": {
+    "chai": "4.1.0",
+    "coveralls": "2.13.1",
+    "istanbul": "0.4.5",
+    "mocha": "3.4.2",
+    "mocha-lcov-reporter": "1.3.0",
+    "rewire": "2.5.2",
+    "sinon": "2.4.1",
+    "sinon-chai": "2.12.0"
+  },
+  "keywords": [
+    "karma-plugin",
+    "karma-reporter"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "email": "yboris@yahoo.com",
+      "name": "Boris Yakubchik"
+    }
+  ],
+  "name": "karma-helpful-reporter",
+  "peerDependencies": {
+    "karma": ">=0.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/whyboris/karma-helpful-reporter.git"
+  },
+  "scripts": {
+    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
+    "test": "./node_modules/mocha/bin/mocha -R spec ./test/*",
+    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec  ./test/*"
+  },
+  "version": "0.3.1"
 }
