@@ -12,7 +12,7 @@ var assert = chai.assert;
 var eq = assert.equal;
 var ok = assert.ok;
 
-describe('nyanCat.js test suite', function() {
+describe('helpful.js test suite', function() {
   var sut;
   var module;
   var configFake;
@@ -32,7 +32,6 @@ describe('nyanCat.js test suite', function() {
 
     drawUtilInstanceFake = {
       'drawScoreboard' : sinon.spy(),
-      'drawNyanCat' : sinon.spy(),
       'tick' : true
     };
 
@@ -93,7 +92,7 @@ describe('nyanCat.js test suite', function() {
       'options', 'adapters'
     ];
 
-    module = rewire('../lib/nyanCat');
+    module = rewire('../lib/helpful');
     module.__set__('drawUtil', drawUtilFake);
     module.__set__('dataStore', dataStoreFake);
     module.__set__('dataTypes', dataTypesFake);
@@ -162,7 +161,7 @@ describe('nyanCat.js test suite', function() {
     });
 
     it('should set options when passed in via config', function() {
-      configFake.nyanReporter = {
+      configFake.helpful = {
         'clearScreenBeforeEveryRun': true,
         'colorBrowser' : 0,
         'colorConsoleLogs' : 13,
@@ -202,7 +201,7 @@ describe('nyanCat.js test suite', function() {
     });
 
     it('should suppressErrorHighlighting if option is set in config', function() {
-      configFake.nyanReporter = {
+      configFake.helpful = {
         'suppressErrorHighlighting' : true
       };
 
@@ -212,7 +211,7 @@ describe('nyanCat.js test suite', function() {
     });
 
     it('should set limit to the number of lines of error shown if option is set in config', function() {
-      configFake.nyanReporter = {
+      configFake.helpful = {
         'maxLogLines' : 15
       };
 
@@ -566,13 +565,11 @@ describe('nyanCat.js test suite', function() {
       sut.draw(false);
 
       expect(util.drawScoreboard.calledOnce).to.be.true;
-      expect(util.drawNyanCat.calledOnce).to.be.true;
       expect(util.tick).to.be.false;
 
       sut.draw();
 
       expect(util.drawScoreboard.calledTwice).to.be.true;
-      expect(util.drawNyanCat.calledTwice).to.be.true;
       expect(util.tick).to.be.true;
     });
 
@@ -580,7 +577,6 @@ describe('nyanCat.js test suite', function() {
       sut.draw(true);
 
       expect(util.drawScoreboard.calledOnce).to.be.false;
-      expect(util.drawNyanCat.calledOnce).to.be.false;
       expect(util.tick).to.be.false;
     })
   });
