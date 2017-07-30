@@ -244,11 +244,11 @@ describe('printers.js test suite', function() {
     });
 
     it('should call write the expected number of times', function() {
-      eq(10, writeFake.callCount);
+      eq(9, writeFake.callCount);
     });
 
     it('should call clc.move.right as expected', function() {
-      eq(4, clcFake.move.right.callCount);
+      eq(3, clcFake.move.right.callCount);
       ok(clcFake.move.right.firstCall.calledWithExactly(5));
       ok(clcFake.move.right.secondCall.calledWithExactly(3));
       ok(clcFake.move.right.thirdCall.calledWithExactly(3));

@@ -19,8 +19,6 @@ describe('nyanCat.js test suite', function() {
   var formatterFake;
   var drawUtilInstanceFake;
   var drawUtilFake;
-  var rainbowifierInstanceFake;
-  var rainbowifierFake;
   var dataStoreInstanceFake;
   var dataStoreFake;
   var dataTypesFake;
@@ -33,12 +31,9 @@ describe('nyanCat.js test suite', function() {
     formatterFake = sinon.spy();
 
     drawUtilInstanceFake = {
-      'appendRainbow' : sinon.spy(),
       'drawScoreboard' : sinon.spy(),
-      'drawRainbow' : sinon.spy(),
       'drawNyanCat' : sinon.spy(),
-      'tick' : true,
-      'fillWithNewlines' : sinon.spy()
+      'tick' : true
     };
 
     drawUtilFake = {
@@ -48,18 +43,6 @@ describe('nyanCat.js test suite', function() {
     drawUtilFake
       .getInstance
         .returns(drawUtilInstanceFake);
-
-    rainbowifierInstanceFake = {
-      'rainbowify' : sinon.spy()
-    };
-
-    rainbowifierFake = {
-      'getInstance' : sinon.stub()
-    };
-
-    rainbowifierFake
-      .getInstance
-        .returns(rainbowifierInstanceFake);
 
     dataStoreInstanceFake = {
       'save' : sinon.spy(),
@@ -112,7 +95,6 @@ describe('nyanCat.js test suite', function() {
 
     module = rewire('../lib/nyanCat');
     module.__set__('drawUtil', drawUtilFake);
-    module.__set__('rainbowifier', rainbowifierFake);
     module.__set__('dataStore', dataStoreFake);
     module.__set__('dataTypes', dataTypesFake);
     module.__set__('printers', printersFake);
@@ -131,8 +113,6 @@ describe('nyanCat.js test suite', function() {
     dataStoreFake = null;
     dataTypesFake = null;
     printersFake = null;
-    rainbowifierInstanceFake = null;
-    rainbowifierFake = null;
     shellUtilFake = null;
     defaultPropertyKeys = null;
     done();
@@ -147,7 +127,7 @@ describe('nyanCat.js test suite', function() {
     it('should have expected default properties', function() {
       var msg = 'my message';
 
-      sut = new module.NyanCat(null, formatterFake, configFake);
+      sut = new module.Helpful(null, formatterFake, configFake);
 
       expect(sut).to.contain.keys(defaultPropertyKeys);
       expect(sut.options).to.not.be.an.object;
@@ -160,9 +140,8 @@ describe('nyanCat.js test suite', function() {
       expect(sut.options.colorLoggedErrors).to.eq(250);
       expect(sut.options.colorTestName).to.eq(199);
       expect(sut.options.colorUnderline).to.eq(254);
-      expect(sut.options.hideBrowser).to.be.false;
+      expect(sut.options.hideBrowser).to.be.true;
       expect(sut.options.maxLogLines).to.be.null;
-      expect(sut.options.numberOfRainbowLines).to.eq(4);
       expect(sut.options.removeLinesContaining).to.be.an.array;
       expect(sut.options.removeTail).to.be.false;
       expect(sut.options.renderOnRunCompleteOnly).to.be.false;
@@ -196,14 +175,13 @@ describe('nyanCat.js test suite', function() {
         'removeTail' : true,
         'underlineFileType' : 'spec.ts',
         'maxLogLines' : 9001,
-        'numberOfRainbowLines' : 100,
         'renderOnRunCompleteOnly' : true,
         'suppressErrorHighlighting' : true,
         'suppressErrorReport' : true,
         'someOtherOption' : 1234,
       };
 
-      sut = new module.NyanCat(null, formatterFake, configFake);
+      sut = new module.Helpful(null, formatterFake, configFake);
 
       expect(sut.options.clearScreenBeforeEveryRun).to.be.true;
       expect(sut.options.colorBrowser).to.eq(0);
@@ -217,7 +195,6 @@ describe('nyanCat.js test suite', function() {
       expect(sut.options.removeTail).to.be.true;
       expect(sut.options.underlineFileType).to.eq('spec.ts');
       expect(sut.options.maxLogLines).to.eq(9001);
-      expect(sut.options.numberOfRainbowLines).to.eq(100);
       expect(sut.options.renderOnRunCompleteOnly).to.be.true;
       expect(sut.options.suppressErrorHighlighting).to.be.true;
       expect(sut.options.suppressErrorReport).to.be.true;
@@ -229,7 +206,7 @@ describe('nyanCat.js test suite', function() {
         'suppressErrorHighlighting' : true
       };
 
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
 
       expect(dataTypesFake.suppressErrorHighlighting.calledOnce).to.be.true;
     });
@@ -239,7 +216,7 @@ describe('nyanCat.js test suite', function() {
         'maxLogLines' : 15
       };
 
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
 
       expect(dataTypesFake.setMaxLogLines.calledOnce).to.be.true;
     });
@@ -254,7 +231,7 @@ describe('nyanCat.js test suite', function() {
     var props;
 
     beforeEach(function(done) {
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
 
       props = {
         '_browsers' : [],
@@ -264,7 +241,6 @@ describe('nyanCat.js test suite', function() {
         'colorIndex' : 0,
         'dataStore' : dataStoreInstanceFake,
         'drawUtil' : drawUtilInstanceFake,
-        'rainbowifier' : rainbowifierInstanceFake,
         'stats' : {},
 
         'totalTime' : 0,
@@ -308,9 +284,9 @@ describe('nyanCat.js test suite', function() {
     var resetSpy;
 
     beforeEach(function(done) {
-      resetSpy = sinon.spy(module.NyanCat.prototype, 'reset');
+      resetSpy = sinon.spy(module.Helpful.prototype, 'reset');
 
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
 
       done();
     });
@@ -367,7 +343,7 @@ describe('nyanCat.js test suite', function() {
       log1 = 'log message 1';
       log2 = 'log message 2';
 
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
       sut.browser_logs = {};
 
       done();
@@ -431,7 +407,7 @@ describe('nyanCat.js test suite', function() {
 
       result = {};
 
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
       sut._browsers = [];
       sut.dataStore = dataStoreInstanceFake;
       sut.draw = sinon.spy();
@@ -483,7 +459,7 @@ describe('nyanCat.js test suite', function() {
 
   describe('onRunComplete method tests', function() {
     beforeEach(function(done) {
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
       sut.draw = sinon.spy();
       sut.browserErrors = [];
       sut.drawUtil = drawUtilInstanceFake;
@@ -509,9 +485,6 @@ describe('nyanCat.js test suite', function() {
 
       sut.onRunComplete();
 
-      ok(duif.fillWithNewlines.calledOnce);
-      ok(duif.fillWithNewlines.calledWithExactly());
-
       ok(printersFake.printTestFailures.calledOnce);
       ok(printersFake.printTestFailures
                         .calledWithExactly(sut.dataStore.getData(),
@@ -526,9 +499,9 @@ describe('nyanCat.js test suite', function() {
 
     it('should call the expected methods when borwserErrors is not empty', function() {
       sut.browserErrors.push('I\'m an error');
-      sut.rainbowifier = rainbowifierInstanceFake;
+
       sut.onRunComplete();
-      ok(printersFake.printRuntimeErrors.calledWithExactly(rainbowifierInstanceFake.rainbowify, sut.browserErrors));
+      ok(printersFake.printRuntimeErrors.calledWithExactly(sut.browserErrors));
     });
   });
 
@@ -541,7 +514,7 @@ describe('nyanCat.js test suite', function() {
       var browser1 = 'browser1';
       var browser2 = 'browser2';
 
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
       sut._browsers = [];
       sut.numberOfBrowsers = 0;
 
@@ -566,7 +539,7 @@ describe('nyanCat.js test suite', function() {
       var browser = 'browser';
       var error = 'error';
 
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
       sut.browserErrors = [];
 
       sut.onBrowserError(browser, error);
@@ -583,7 +556,7 @@ describe('nyanCat.js test suite', function() {
     var util;
 
     beforeEach(function(done) {
-      sut = new module.NyanCat(null, null, configFake);
+      sut = new module.Helpful(null, null, configFake);
       util = sut.drawUtil = drawUtilInstanceFake;
       done();
     });
@@ -591,26 +564,22 @@ describe('nyanCat.js test suite', function() {
     it('should call all methods and negate the tick property ' +
        'when appendOnly is false or absent', function() {
       sut.draw(false);
-      expect(util.appendRainbow.calledOnce).to.be.true;
+
       expect(util.drawScoreboard.calledOnce).to.be.true;
-      expect(util.drawRainbow.calledOnce).to.be.true;
       expect(util.drawNyanCat.calledOnce).to.be.true;
       expect(util.tick).to.be.false;
 
       sut.draw();
-      expect(util.appendRainbow.calledTwice).to.be.true;
+
       expect(util.drawScoreboard.calledTwice).to.be.true;
-      expect(util.drawRainbow.calledTwice).to.be.true;
       expect(util.drawNyanCat.calledTwice).to.be.true;
       expect(util.tick).to.be.true;
     });
 
-    it('should only call appendRainbow() and ' +
-       'update tick when appendOnly is true', function() {
+    it('should only update tick when appendOnly is true', function() {
       sut.draw(true);
-      expect(util.appendRainbow.calledOnce).to.be.true;
+
       expect(util.drawScoreboard.calledOnce).to.be.false;
-      expect(util.drawRainbow.calledOnce).to.be.false;
       expect(util.drawNyanCat.calledOnce).to.be.false;
       expect(util.tick).to.be.false;
     })
