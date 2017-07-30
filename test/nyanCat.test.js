@@ -32,7 +32,6 @@ describe('nyanCat.js test suite', function() {
 
     drawUtilInstanceFake = {
       'drawScoreboard' : sinon.spy(),
-      'drawRainbow' : sinon.spy(),
       'drawNyanCat' : sinon.spy(),
       'tick' : true
     };
@@ -567,14 +566,12 @@ describe('nyanCat.js test suite', function() {
       sut.draw(false);
 
       expect(util.drawScoreboard.calledOnce).to.be.true;
-      expect(util.drawRainbow.calledOnce).to.be.true;
       expect(util.drawNyanCat.calledOnce).to.be.true;
       expect(util.tick).to.be.false;
 
       sut.draw();
 
       expect(util.drawScoreboard.calledTwice).to.be.true;
-      expect(util.drawRainbow.calledTwice).to.be.true;
       expect(util.drawNyanCat.calledTwice).to.be.true;
       expect(util.tick).to.be.true;
     });
@@ -583,7 +580,6 @@ describe('nyanCat.js test suite', function() {
       sut.draw(true);
 
       expect(util.drawScoreboard.calledOnce).to.be.false;
-      expect(util.drawRainbow.calledOnce).to.be.false;
       expect(util.drawNyanCat.calledOnce).to.be.false;
       expect(util.tick).to.be.false;
     })

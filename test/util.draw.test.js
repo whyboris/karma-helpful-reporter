@@ -88,12 +88,6 @@ describe('util/draw.js test suite', function() {
   });
 
   /**
-   * appendRainbow() tests
-   */
-
-
-
-  /**
    * drawScoreboard() tests
    */
 
@@ -152,56 +146,6 @@ describe('util/draw.js test suite', function() {
     it('should call cursorUp with numberOfLines', function() {
       expect(sut.cursorUp.calledOnce).to.be.true;
       expect(sut.cursorUp.calledWithExactly(numOfLns)).to.be.true;
-    });
-  });
-
-  /**
-   * drawRainbow() tests
-   */
-
-  describe('drawRainbow method tests', function() {
-    it('should call write and cursorUp as expected', function() {
-      sut.trajectories = [['hel'], ['lo!']];
-      sut.cursorUp = sinon.spy();
-      sut.drawRainbow();
-
-      expect(fakeWrite.callCount).to.eq(6);
-      expect(sut.cursorUp.calledOnce).to.be.true;
-
-      var resultOne = '\u001b[' + sut.scoreboardWidth + 'C';
-      var resultTwo = sut.trajectories[0].join('');
-      var resultThree = '\n';
-
-      expect(fakeWrite.firstCall.calledWithExactly(resultOne)).to.be.true;
-      expect(fakeWrite.secondCall.calledWithExactly(resultTwo)).to.be.true;
-      expect(fakeWrite.thirdCall.calledWithExactly(resultThree)).to.be.true;
-    });
-  });
-
-
-  /**
-   * face() tests
-   */
-
-  describe('face method tests', function() {
-    it('should return as exected if stats.failed is true', function() {
-      var face = sut.face({failed: true});
-      expect(face).to.eq('( x .x)');
-    });
-
-    it('should return as exected if stats.skipped is true', function() {
-      var face = sut.face({skipped: true});
-      expect(face).to.eq('( o .o)');
-    });
-
-    it('should return as exected if stats.success is true', function() {
-      var face = sut.face({success: true});
-      expect(face).to.eq('( ^ .^)');
-    });
-
-    it('should return as exected if none of the above are true', function() {
-      var face = sut.face({});
-      expect(face).to.eq('( - .-)');
     });
   });
 
