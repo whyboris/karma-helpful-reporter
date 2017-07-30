@@ -37,8 +37,8 @@ Setup & Options
 ===
 
 *Setup*: Inside your `karma.conf.js` 
- - include `require('karma-helpful-reporter'),` inside the `plugins` array
- - include `'helpful'` inside the `reporters` array
+ - add `require('karma-helpful-reporter')` to the `plugins` array
+ - add `'helpful'` to the `reporters` array
 
 *Options*: optionally, add the `helpfulReporter` object with as many properties from the below set as you'd like.
  - The listed properties' values are the default ones
@@ -47,19 +47,8 @@ Setup & Options
 // karma.conf.js
 module.exports = function(config) {
   config.set({
-     ...
-    plugins: [
-     ...
-      require('karma-helpful-reporter'),
-     ...
-    ],
-     ...
-    reporters: [
-     ...
-      'helpful'
-     ...
-    ],
-     ...
+    plugins: [ require('karma-helpful-reporter') ],
+    reporters: [ 'helpful' ],
 
     // Optional reporter settings
     helpfulReporter: {
