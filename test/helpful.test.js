@@ -36,7 +36,8 @@ describe('helpful.js test suite', function() {
     };
 
     drawUtilFake = {
-      'getInstance' : sinon.stub()
+      'getInstance' : sinon.stub(),
+      'setAnimationStyle': sinon.spy()
     };
 
     drawUtilFake
@@ -134,6 +135,7 @@ describe('helpful.js test suite', function() {
       assert.isObject(sut.options);
 
       // all the options
+      expect(sut.options.animationStyle).to.eq('braille');
       expect(sut.options.clearScreenBeforeEveryRun).to.be.false;
       expect(sut.options.colorBrowser).to.eq(205);
       expect(sut.options.colorConsoleLogs).to.eq(45);
@@ -165,6 +167,7 @@ describe('helpful.js test suite', function() {
 
     it('should set options when passed in via config', function() {
       configFake.helpfulReporter = {
+        'animationStyle': 'clock',
         'clearScreenBeforeEveryRun': true,
         'colorBrowser' : 0,
         'colorConsoleLogs' : 13,
@@ -185,6 +188,7 @@ describe('helpful.js test suite', function() {
 
       sut = new module.Helpful(null, formatterFake, configFake);
 
+      expect(sut.options.animationStyle).to.eq('clock');
       expect(sut.options.clearScreenBeforeEveryRun).to.be.true;
       expect(sut.options.colorBrowser).to.eq(0);
       expect(sut.options.colorConsoleLogs).to.eq(13);
@@ -445,17 +449,16 @@ describe('helpful.js test suite', function() {
       expect(dataStoreInstanceFake.save.calledWithExactly(browser, result)).to.be.true;
     });
 
-    it('should call the draw method with false by default', function() {
+    it('should call the draw method when renderOnRunCompleteOnly is false', function() {
+      sut.options.renderOnRunCompleteOnly = false;
       sut.onSpecComplete(browser, result);
       expect(sut.draw.calledOnce).to.be.true;
-      expect(sut.draw.calledWithExactly(false)).to.be.true;
     });
 
-    it('should call the draw method with true if renderOnRunCompleteOnly is true', function() {
+    it('should NOT call the draw method when renderOnRunCompleteOnly is true', function() {
       sut.options.renderOnRunCompleteOnly = true;
       sut.onSpecComplete(browser, result);
-      expect(sut.draw.calledOnce).to.be.true;
-      expect(sut.draw.calledWithExactly(true)).to.be.true;
+      expect(sut.draw.calledOnce).to.be.false;
     });
 
   });
