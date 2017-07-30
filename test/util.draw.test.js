@@ -15,7 +15,6 @@ var eq = assert.equal;
 describe('util/draw.js test suite', function() {
   var sut;
   var module;
-  var numOfLns;
   var shellWidth;
   var shellHeight;
   var fakeColors;
@@ -25,7 +24,6 @@ describe('util/draw.js test suite', function() {
 
   beforeEach(function(done) {
     fakeWrite = sinon.spy();
-    numOfLns = 4;
     shellWidth = 100;
     shellHeight = 50;
 
@@ -51,8 +49,6 @@ describe('util/draw.js test suite', function() {
 
     module.__set__('shell', shellFake);
 
-    sut = module.getInstance(numOfLns);
-
     module.__set__('clc', clcFake);
     module.__set__('write', fakeWrite);
 
@@ -62,7 +58,6 @@ describe('util/draw.js test suite', function() {
   afterEach(function(done) {
     sut = null;
     module = null;
-    numOfLns = null;
     shellWidth = null;
     fakeColors = null;
     fakeWrite = null;
@@ -75,13 +70,11 @@ describe('util/draw.js test suite', function() {
     it('should set the defaults values appropriately', function() {
       var expected, actual;
 
-      eq(4, sut.numberOfLines);
-      eq(11, sut.nyanCatWidth);
       eq(5, sut.scoreboardWidth);
       eq(0, sut.tick);
       assert.deepEqual([[], [], [], []], sut.trajectories);
 
-      expected = (shellWidth * 0.75 | 0) - sut.nyanCatWidth;
+      expected = (shellWidth * 0.75 | 0);
       actual = sut.trajectoryWidthMax;
       eq(expected, actual);
     });
@@ -94,7 +87,6 @@ describe('util/draw.js test suite', function() {
   describe('drawScoreboard method tests', function() {
     var colors;
     var stats;
-    var numOfLns;
 
     beforeEach(function(done) {
       stats = {
@@ -104,10 +96,7 @@ describe('util/draw.js test suite', function() {
         'skipped': 99
       };
 
-      numOfLns = 111;
-
       sut.cursorUp = sinon.spy();
-      sut.numberOfLines = numOfLns;
 
       clcFake.yellow.withArgs(stats.total).returns('yellow>' + stats.total);
       clcFake.green.withArgs(stats.success).returns('green>' + stats.success);
@@ -121,7 +110,6 @@ describe('util/draw.js test suite', function() {
     afterEach(function(done) {
       colors = null;
       stats = null;
-      numOfLns = null;
       done();
     });
 
@@ -142,11 +130,7 @@ describe('util/draw.js test suite', function() {
       expected = ' cyan>' + stats.skipped + '\n';
       ok(fakeWrite.getCall(3).calledWithExactly(expected));
     });
-
-    it('should call cursorUp with numberOfLines', function() {
-      expect(sut.cursorUp.calledOnce).to.be.true;
-      expect(sut.cursorUp.calledWithExactly(numOfLns)).to.be.true;
-    });
+  
   });
 
   /**

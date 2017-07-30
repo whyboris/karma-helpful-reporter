@@ -244,7 +244,7 @@ describe('printers.js test suite', function() {
     });
 
     it('should call write the expected number of times', function() {
-      eq(10, writeFake.callCount);
+      eq(9, writeFake.callCount);
     });
 
     it('should call clc.move.right as expected', function() {
