@@ -1,11 +1,11 @@
 (function() {
   'use strict';
-  var NyanCat = require('./lib/nyanCat').NyanCat;
+  var Helpful = require('./lib/helpful').Helpful;
 
-  NyanCat.$inject = ['baseReporterDecorator', 'formatError', 'config'];
+  Helpful.$inject = ['baseReporterDecorator', 'formatError', 'config'];
 
   module.exports = {
-    'reporter:helpful': ['type', NyanCat]
+    'reporter:helpful': ['type', Helpful]
   };
 
 })();
