@@ -37,7 +37,8 @@ describe('helpful.js test suite', function() {
 
     drawUtilFake = {
       'getInstance' : sinon.stub(),
-      'setAnimationStyle': sinon.spy()
+      'setAnimationStyle': sinon.spy(),
+      'setColorOptions' : sinon.spy()
     };
 
     drawUtilFake

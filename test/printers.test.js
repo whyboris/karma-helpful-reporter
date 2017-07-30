@@ -17,6 +17,10 @@ describe('printers.js test suite', function() {
   var clcFake;
   var colorConsoleLogsFake;
 
+  var colorPassFake;
+  var colorFailFake;
+  var colorSkipFake;
+
   beforeEach(function(done) {
     clcFake = {
       'red':          sinon.stub(),
@@ -33,10 +37,16 @@ describe('printers.js test suite', function() {
     };
 
     colorConsoleLogsFake = sinon.stub();
+    colorPassFake = sinon.stub();
+    colorFailFake = sinon.stub();
+    colorSkipFake = sinon.stub();
 
     sut = rewire('../lib/util/printers');
     sut.__set__('clc', clcFake);
     sut.__set__('colorConsoleLogs', colorConsoleLogsFake);
+    sut.__set__('colorPass', colorPassFake);
+    sut.__set__('colorFail', colorFailFake);
+    sut.__set__('colorSkip', colorSkipFake);
 
     done();
   });
@@ -52,7 +62,7 @@ describe('printers.js test suite', function() {
   describe('setColorOptions()', function() {
     it('should set color of console logs', function() {
       sut.setColorOptions({"colorConsoleLogs": 99});
-      ok(sut.__get__('clc').xterm.callCount === 1);
+      ok(sut.__get__('clc').xterm.callCount === 4);
     });
   });
 
@@ -219,9 +229,9 @@ describe('printers.js test suite', function() {
       };
 
       clcFake.move.right.returns(tab);
-      clcFake.green.withArgs(stats.success + ' passed').returns('green>' + stats.success);
-      clcFake.red.withArgs(stats.failed + ' failed').returns('red>' + stats.failed);
-      clcFake.yellow.withArgs(stats.skipped + ' skipped').returns('yellow>' + stats.skipped);
+      colorPassFake.withArgs(stats.success + ' passed').returns('10>' + stats.success);
+      colorFailFake.withArgs(stats.failed + ' failed').returns('9>' + stats.failed);
+      colorSkipFake.withArgs(stats.skipped + ' skipped').returns('11>' + stats.skipped);
 
       sut.__set__('write', writeFake);
 
@@ -249,11 +259,11 @@ describe('printers.js test suite', function() {
 
     it('should call write with the expected arguments', function() {
       ok(writeFake.getCall(0).calledWithExactly(tab));
-      ok(writeFake.getCall(1).calledWithExactly('green>' + stats.success));
+      ok(writeFake.getCall(1).calledWithExactly('10>' + stats.success));
       ok(writeFake.getCall(2).calledWithExactly(tab));
-      ok(writeFake.getCall(3).calledWithExactly('red>' + stats.failed));
+      ok(writeFake.getCall(3).calledWithExactly('9>' + stats.failed));
       ok(writeFake.getCall(4).calledWithExactly(tab));
-      ok(writeFake.getCall(5).calledWithExactly('yellow>' + stats.skipped));
+      ok(writeFake.getCall(5).calledWithExactly('11>' + stats.skipped));
       ok(writeFake.getCall(6).calledWithExactly('\n'));
       ok(writeFake.getCall(7).calledWithExactly('\n'));
     });

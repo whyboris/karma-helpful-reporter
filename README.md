@@ -64,8 +64,11 @@ module.exports = function(config) {
       underlineFileType: '',
       colorBrowser: 205,
       colorConsoleLogs: 45,
+      colorFail: 9,
       colorFirstLine: 211,
       colorLoggedErrors: 250,
+      colorPass: 10,
+      colorSkip: 11,
       colorTestName: 199,
       colorUnderline: 254,
     }
@@ -87,8 +90,11 @@ suppressErrorReport | false | Suppress the error report at the end of the test r
 underlineFileType | '' | Underline filename of some file type; all files in the error report that have this particular extention will be underlined, e.g. _'spec.ts'_
 colorBrowser | 205 | <img src="http://medyk.org/colors/ff5faf.png" style="border: 1px solid black" width="20" height="20" /> 
 colorConsoleLogs | 45 | <img src="http://medyk.org/colors/00d7ff.png" style="border: 1px solid black" width="20" height="20" />
+colorFail | 9 | <img src="http://medyk.org/colors/ff0000.png" style="border: 1px solid black" width="20" height="20" /> 
 colorFirstLine | 211 | <img src="http://medyk.org/colors/ff87af.png" style="border: 1px solid black" width="20" height="20" />
 colorLoggedErrors | 250 | <img src="http://medyk.org/colors/bcbcbc.png" style="border: 1px solid black" width="20" height="20" />
+colorPass | 10 | <img src="http://medyk.org/colors/00ff00.png" style="border: 1px solid black" width="20" height="20" /> 
+colorSkip | 11 | <img src="http://medyk.org/colors/ffff00.png" style="border: 1px solid black" width="20" height="20" /> 
 colorTestName | 199 | <img src="http://medyk.org/colors/ff00af.png" style="border: 1px solid black" width="20" height="20" />
 colorUnderline | 254 | <img src="http://medyk.org/colors/e4e4e4.png" style="border: 1px solid black" width="20" height="20" />
 
