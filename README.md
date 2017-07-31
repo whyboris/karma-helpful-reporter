@@ -65,7 +65,7 @@ module.exports = function(config) {
 
 Property | Default | Description
 --- | --- | ---
-animationStyle | 'braille' | Set in-progress animation to _'braille'_ or emoji _'clock'_.
+animationStyle | 'braille' | Set in-progress animation to _'braille'_, _'braille2'_, or emoji _'clock'_.
 clearScreenBeforeEveryRun | false | Clear screen before every run
 hideBrowser | true | Hide browser name from the report
 maxLogLines | 42 | Limit the maximum number of lines in report
