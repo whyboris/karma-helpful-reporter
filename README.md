@@ -7,11 +7,13 @@
 karma-helpful-reporter
 ===
 
-Karma Helpful Reporter was copied from [karma-nyan-reporter](https://github.com/dgarlitt/karma-nyan-reporter/) in July 2017 with intent to build on and improve its functionality. 
+Karma Helpful Reporter gives you a customizable report after you run your Karma tests.
 
-_Screenshot coming soon_
+![karma-helpful-reporter](https://user-images.githubusercontent.com/17264277/28763978-fcc6466c-758f-11e7-9343-b13933f15e88.png "Karma Helpful Reporter")
 
-Installation
+The errors from failed tests are displayed hierarchically based on the test suite and nesting level. `console.log()` messages are output at the bottom below the test summary and grouped by browser.
+
+Setup & Options
 ===
 
 Install with npm:
@@ -20,27 +22,11 @@ Install with npm:
 npm install --save-dev karma-helpful-reporter
 ```
 
-This package follows Karma's plugin naming convention; you can run your tests thus:
-
-```sh
-karma start path/to/karma.conf.js --reporters helpful
-```
-
-Output
-===
-
-The errors from failed tests are displayed hierarchically based on the test suite and nesting level. `console.log()` messages are output at the bottom below the test summary and grouped by browser.
-
-_Screenshot coming soon_
-
-Setup & Options
-===
-
-*Setup*: Inside your `karma.conf.js` 
+Inside your `karma.conf.js` 
  - add `require('karma-helpful-reporter')` to the `plugins` array
  - add `'helpful'` to the `reporters` array
 
-*Options*: optionally, add the `helpfulReporter` object with as many properties from the below set as you'd like.
+Optionally, add the `helpfulReporter` object with as many properties from the below set as you'd like.
  - The listed properties' values are the default ones
 
 ```js
@@ -76,6 +62,7 @@ module.exports = function(config) {
 };
 ```
 
+
 Property | Default | Description
 --- | --- | ---
 animationStyle | 'braille' | Set in-progress animation to _'braille'_ or emoji _'clock'_.
@@ -87,16 +74,20 @@ removeTail | false | Remove from the final report anything that follows '<-', e.
 renderOnRunCompleteOnly | false | Do not animate while tests are running
 suppressErrorHighlighting | false | Highlight in red all lines not containing _node_modules_
 suppressErrorReport | false | Suppress the error report at the end of the test run
-underlineFileType | '' | Underline filename of some file type; all files in the error report that have this particular extention will be underlined, e.g. _'spec.ts'_
-colorBrowser | 205 | <img src="http://medyk.org/colors/ff5faf.png" style="border: 1px solid black" width="20" height="20" /> 
+underlineFileType | '' | Underline filename of some file type; all files in the error report that have this particular extention will be underlined, e.g. _'spec.ts'_; set the color with the _colorUnderline_ property
+colorBrowser | 224 | <img src="http://medyk.org/colors/ffd7d7.png" style="border: 1px solid black" width="20" height="20" /> 
 colorConsoleLogs | 45 | <img src="http://medyk.org/colors/00d7ff.png" style="border: 1px solid black" width="20" height="20" />
-colorFail | 9 | <img src="http://medyk.org/colors/ff0000.png" style="border: 1px solid black" width="20" height="20" /> 
-colorFirstLine | 211 | <img src="http://medyk.org/colors/ff87af.png" style="border: 1px solid black" width="20" height="20" />
+colorFail | 210 | <img src="http://medyk.org/colors/ff8787.png" style="border: 1px solid black" width="20" height="20" /> 
+colorFirstLine | 217 | <img src="http://medyk.org/colors/ffafaf.png" style="border: 1px solid black" width="20" height="20" />
 colorLoggedErrors | 250 | <img src="http://medyk.org/colors/bcbcbc.png" style="border: 1px solid black" width="20" height="20" />
-colorPass | 10 | <img src="http://medyk.org/colors/00ff00.png" style="border: 1px solid black" width="20" height="20" /> 
-colorSkip | 11 | <img src="http://medyk.org/colors/ffff00.png" style="border: 1px solid black" width="20" height="20" /> 
-colorTestName | 199 | <img src="http://medyk.org/colors/ff00af.png" style="border: 1px solid black" width="20" height="20" />
-colorUnderline | 254 | <img src="http://medyk.org/colors/e4e4e4.png" style="border: 1px solid black" width="20" height="20" />
+colorPass | 154 | <img src="http://medyk.org/colors/afff00.png" style="border: 1px solid black" width="20" height="20" /> 
+colorSkip | 117 | <img src="http://medyk.org/colors/87d7ff.png" style="border: 1px solid black" width="20" height="20" /> 
+colorTestName | 210 | <img src="http://medyk.org/colors/ff8787.png" style="border: 1px solid black" width="20" height="20" />
+colorUnderline | 255 | <img src="http://medyk.org/colors/eeeeee.png" style="border: 1px solid black" width="20" height="20" />
 
 Set custom colors by using permitted [cli-color](https://github.com/medikoo/cli-color) numbers.
 
+Notes
+===
+
+This project was copied from [karma-nyan-reporter](https://github.com/dgarlitt/karma-nyan-reporter/) in July 2017 with intent to build on and improve its functionality. Code cleanup and refactoring will happen during August 2017.
