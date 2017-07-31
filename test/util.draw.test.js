@@ -64,6 +64,8 @@ describe('util/draw.js test suite', function() {
     module.__set__('colorFail', sinon.stub());
     module.__set__('colorSkip', sinon.stub());
 
+    module.__set__('frame', 33);
+
     done();
   });
 
@@ -108,15 +110,30 @@ describe('util/draw.js test suite', function() {
 
   // todo -- test actual behavior
   describe('drawProgressBar()', function () {
+
+    // hit all conditionals
+    // currently something is not working
     it('should draw drawProgressBar', function () {
-      sut.drawProgressBar({success: 24, total: 145, skipped: 11, failed: 4});
+      sut.drawProgressBar({success: 982, total: 1000, skipped: 9, failed: 9});
+    });
+    it('should draw drawProgressBar', function () {
+      sut.drawProgressBar({success: 1200, total: 1000, skipped: 9, failed: 9});
+    });
+    it('should draw drawProgressBar', function () {
+      sut.drawProgressBar({success: 9, total: 1000, skipped: 982, failed: 9});
+    });
+    it('should draw drawProgressBar', function () {
+      sut.drawProgressBar({success: 9, total: 1000, skipped: 9, failed: 1200});
     });
   });
 
   // todo -- test actual behavior
   describe('drawChart()', function () {
-    it('should draw chart', function () {
+    it('should draw chart in progress', function () {
       sut.drawChart({success: 24, total: 55, skipped: 11, failed: 4});
+    });
+    it('should draw final chart', function () {
+      sut.drawChart({success: 3, total: 9, skipped: 3, failed: 3});
     });
   });
 
@@ -127,11 +144,26 @@ describe('util/draw.js test suite', function() {
     });
   });
 
-  // todo -- test actual behavior
   describe('finalEmoji()', function () {
-    it('should return an emoji', function () {
-      sut.finalEmoji({success: 24, total: 55, skipped: 11, failed: 4});
-      // expect to return some specific emoji
+    it('should return a poo emoji', function () {
+      var emoji = sut.finalEmoji({ success: 4, skipped: 0, failed: 6, total: 10 });
+      expect(emoji).to.eq('\u{1F4A9}');
+    });
+    it('should return a sad emoji', function () {
+      var emoji = sut.finalEmoji({ success: 1, skipped: 5, failed: 4, total: 10 });
+      expect(emoji).to.eq('\u{1F61E}');
+    });
+    it('should return a thumbs up emoji', function () {
+      var emoji = sut.finalEmoji({ success: 4, skipped: 6, failed: 0, total: 10 });
+      expect(emoji).to.eq('\u{1F44D}');
+    });
+    it('should return a grin emoji', function () {
+      var emoji = sut.finalEmoji({ success: 10, skipped: 0, failed: 0, total: 10 });
+      expect(emoji).to.eq('\u{1F44D}');
+    });
+    it('should return an ok hand emoji', function () {
+      var emoji = sut.finalEmoji({ success: 5, skipped: 3, failed: 2, total: 10 });
+      expect(emoji).to.eq('\u{1F44C}');
     });
   });
 
