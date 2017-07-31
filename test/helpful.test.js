@@ -138,12 +138,15 @@ describe('helpful.js test suite', function() {
       // all the options
       expect(sut.options.animationStyle).to.eq('braille');
       expect(sut.options.clearScreenBeforeEveryRun).to.be.false;
-      expect(sut.options.colorBrowser).to.eq(205);
+      expect(sut.options.colorBrowser).to.eq(224);
       expect(sut.options.colorConsoleLogs).to.eq(45);
-      expect(sut.options.colorFirstLine).to.eq(211);
+      expect(sut.options.colorFail).to.eq(210);
+      expect(sut.options.colorFirstLine).to.eq(217);
       expect(sut.options.colorLoggedErrors).to.eq(250);
-      expect(sut.options.colorTestName).to.eq(199);
-      expect(sut.options.colorUnderline).to.eq(254);
+      expect(sut.options.colorPass).to.eq(154);
+      expect(sut.options.colorSkip).to.eq(117);
+      expect(sut.options.colorTestName).to.eq(210);
+      expect(sut.options.colorUnderline).to.eq(255);
       expect(sut.options.hideBrowser).to.be.true;
       expect(sut.options.maxLogLines).to.be.null;
 
