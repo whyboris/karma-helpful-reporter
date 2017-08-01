@@ -110,37 +110,35 @@ describe('util/draw.js test suite', function() {
 
   // todo -- test actual behavior
   describe('drawProgressBar()', function () {
-
-    // hit all conditionals
-    // currently something is not working
     it('should draw drawProgressBar', function () {
-      sut.drawProgressBar({success: 982, total: 1000, skipped: 9, failed: 9});
+      sut.drawProgressBar({success: 9, total: 10, skipped: 1, failed: 1});
     });
     it('should draw drawProgressBar', function () {
-      sut.drawProgressBar({success: 1200, total: 1000, skipped: 9, failed: 9});
-    });
-    it('should draw drawProgressBar', function () {
-      sut.drawProgressBar({success: 9, total: 1000, skipped: 982, failed: 9});
-    });
-    it('should draw drawProgressBar', function () {
-      sut.drawProgressBar({success: 9, total: 1000, skipped: 9, failed: 1200});
+      sut.drawProgressBar({success: 10, total: 10, skipped: 0, failed: 0});
     });
   });
 
   // todo -- test actual behavior
   describe('drawChart()', function () {
     it('should draw chart in progress', function () {
-      sut.drawChart({success: 24, total: 55, skipped: 11, failed: 4});
+      sut.drawChart({success: 2, total: 9, skipped: 1, failed: 3});
+      // expect to call this.animationFrame()
+      // expect to call write 3 times
     });
     it('should draw final chart', function () {
       sut.drawChart({success: 3, total: 9, skipped: 3, failed: 3});
+      // expect to call this.finalEmoji()
+      // expect to call write 3 times
     });
   });
 
-  // todo -- test actual behavior
   describe('drawThisMany()', function () {
     it('should draw this many', function () {
-      // sut.drawThisMany(4, '+', colorFail);
+      var colorFail = function(str) {
+        return str;
+      };
+      var optput = sut.drawThisMany(4, '+', colorFail);
+      expect(optput).to.eq('++++');
     });
   });
 
