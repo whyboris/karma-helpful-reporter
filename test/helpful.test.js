@@ -32,7 +32,8 @@ describe('helpful.js test suite', function() {
 
     drawUtilInstanceFake = {
       'tick' : true,
-      'cursorDown' : sinon.stub()
+      'cursorDown' : sinon.stub(),
+      'drawChart': sinon.spy()
     };
 
     drawUtilFake = {
@@ -576,8 +577,11 @@ describe('helpful.js test suite', function() {
       done();
     });
 
+    // TODO - test behavior
     it('should do things correctly', function() {
-      // no tests yet
+      sut.draw();
+      // expect drawChart to have bene called
+      // expect drawUtil.tick to be toggled
     })
   });
 
