@@ -222,10 +222,10 @@ describe('printers.js test suite', function() {
       writeFake.returnsArg(0);
 
       stats = {
-        'total': 11,
-        'success': 33,
-        'failed': 66,
-        'skipped': 99
+        'total': 10,
+        'success': 3,
+        'failed': 2,
+        'skipped': 5
       };
 
       clcFake.move.right.returns(tab);
@@ -235,7 +235,7 @@ describe('printers.js test suite', function() {
 
       sut.__set__('write', writeFake);
 
-      sut.printStats(stats);
+      sut.printStats(stats, 130);
 
       done();
     });
