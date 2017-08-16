@@ -45,7 +45,6 @@ module.exports = function(config) {
       removeLinesContaining: [],
       removeTail: false,
       renderOnRunCompleteOnly: false,
-      suppressErrorHighlighting: false,
       suppressErrorReport: false,
       underlineFileType: '',
       colorBrowser: 205,
@@ -72,7 +71,6 @@ maxLogLines | 42 | Limit the maximum number of lines in report
 removeLinesContaining | [] | Remove all lines from the final report containing any of these strings, e.g. _['@angular', 'zone.js']_
 removeTail | false | Remove from the final report anything that follows '<-', e.g. _blah blah <- test.ts 4250:39_ becomes _blah blah_
 renderOnRunCompleteOnly | false | Do not animate while tests are running
-suppressErrorHighlighting | false | Highlight in red all lines not containing _node_modules_
 suppressErrorReport | false | Suppress the error report at the end of the test run
 underlineFileType | '' | Underline filename of some file type; all files in the error report that have this particular extention will be underlined, e.g. _'spec.ts'_; set the color with the _colorUnderline_ property
 colorBrowser | 224 | <img src="http://medyk.org/colors/ffd7d7.png" style="border: 1px solid black" width="20" height="20" /> 

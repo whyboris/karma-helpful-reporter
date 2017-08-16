@@ -68,8 +68,7 @@ describe('helpful.js test suite', function() {
       'setErrorFormatterMethod' : sinon.spy(),
       'setFileTypeToUnderline' : sinon.spy(),
       'setLinesToExclude' : sinon.spy(),
-      'setMaxLogLines' : sinon.spy(),
-      'suppressErrorHighlighting' : sinon.spy()
+      'setMaxLogLines' : sinon.spy()
     };
 
     printersFake = {
@@ -155,7 +154,6 @@ describe('helpful.js test suite', function() {
 
       expect(sut.options.removeTail).to.be.false;
       expect(sut.options.renderOnRunCompleteOnly).to.be.false;
-      expect(sut.options.suppressErrorHighlighting).to.be.true;
       expect(sut.options.suppressErrorReport).to.be.false;
       expect(sut.options.underlineFileType).to.be.null;
       
@@ -186,7 +184,6 @@ describe('helpful.js test suite', function() {
         'underlineFileType' : 'spec.ts',
         'maxLogLines' : 9001,
         'renderOnRunCompleteOnly' : true,
-        'suppressErrorHighlighting' : true,
         'suppressErrorReport' : true,
         'someOtherOption' : 1234,
       };
@@ -207,19 +204,8 @@ describe('helpful.js test suite', function() {
       expect(sut.options.underlineFileType).to.eq('spec.ts');
       expect(sut.options.maxLogLines).to.eq(9001);
       expect(sut.options.renderOnRunCompleteOnly).to.be.true;
-      expect(sut.options.suppressErrorHighlighting).to.be.true;
       expect(sut.options.suppressErrorReport).to.be.true;
       expect(sut.options.someOtherOption).to.be.undefined;
-    });
-
-    it('should suppressErrorHighlighting if option is set in config', function() {
-      configFake.helpfulReporter = {
-        'suppressErrorHighlighting' : true
-      };
-
-      sut = new module.Helpful(null, null, configFake);
-
-      expect(dataTypesFake.suppressErrorHighlighting.calledOnce).to.be.true;
     });
 
     it('should set limit to the number of lines of error shown if option is set in config', function() {
