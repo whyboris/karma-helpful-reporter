@@ -13,7 +13,7 @@ var eq = assert.equal;
 var ok = assert.ok;
 
 describe('data/types.js test suite', function() {
-  var dt, clcFake, right;
+  var dt, clcFake, right, logSpy;
   var tab = 3;
 
   beforeEach(function(done) {
@@ -21,13 +21,9 @@ describe('data/types.js test suite', function() {
 
     clcFake = {
       'erase': sinon.stub(),
-      'colorTestName': sinon.stub(),
-      'colorUnderline': sinon.stub(),
-      'white': sinon.stub(),
       'red': sinon.stub(),
+      'white': sinon.stub(),
       'yellow': sinon.stub(),
-      'redBright': sinon.stub(),
-      'blackBright': sinon.stub(),
       'move': {
         'right': sinon.stub()
       },
@@ -38,12 +34,12 @@ describe('data/types.js test suite', function() {
 
     clcFake.move.right.returns(right);
 
-    clcFake.colorTestName.returns(clcFake.colorTestName);
-
-    clcFake.colorUnderline.returns(clcFake.colorUnderline);
-
     dt = rewire('../lib/data/types');
     dt.__set__('clc', clcFake);
+    
+    logSpy = sinon.stub();
+    dt.__set__('colorLoggedErrors', logSpy);
+
     done();
   });
 
@@ -172,15 +168,6 @@ describe('data/types.js test suite', function() {
         expect(dt.__get__("maxLines")).to.eq(9);
       });
     });
-
-    describe('suppressErrorHighlighting()', function() {
-      it('should set errorHighlightingEnable to false', function() {
-        dt.__set__("errorHighlightingEnabled", true);
-        dt.suppressErrorHighlighting();
-        expect(dt.__get__("errorHighlightingEnabled")).to.be.false;
-      });
-    });
-
   });
 
   /**
@@ -350,11 +337,6 @@ describe('data/types.js test suite', function() {
       // ok(clcFake.yellow.calledOnce);
       // ok(clcFake.yellow.calledWithExactly(name));
 
-      // ok(clcFake.redBright.calledOnce);
-      // ok(clcFake.redBright.calledWithExactly(errors[0]));
-
-      // ok(clcFake.blackBright.calledOnce);
-      // ok(clcFake.blackBright.getCall(0).calledWithExactly(errors[1]));
       // ok(clcFake.black.bgRed.calledOnce);
       // ok(clcFake.black.bgRed.getCall(0).calledWithExactly(errors[2]));
     });
@@ -362,40 +344,21 @@ describe('data/types.js test suite', function() {
     it('should return the expected string when toString is called', function() {
       var expected, actual;
       var yellow = 'yellow>';
-      var redBright = 'redBright>';
-      var blackBright = 'blackBright>';
       var bgRed = 'bgRed>';
 
       clcFake.yellow.returns(yellow);
-      clcFake.redBright.returns(redBright);
-      clcFake.blackBright.returns(blackBright);
       clcFake.black.bgRed.returns(bgRed);
 
       expected = [
         right + yellow,
-        right + '1) ' + redBright,
-        right + blackBright,
+        right + '1) ',
+        right,
         right + bgRed,
       ].join('\n');
 
       actual = sut.toString();
 
       // eq(expected, actual);
-    });
-
-    describe('errorHighlighting', function() {
-      it('should not use black.bgRed when suppressErrorHighlighting is called', function() {
-        sut.errors = [
-          'Error Info',
-          'error1',
-          'error2'
-        ];
-
-        dt.suppressErrorHighlighting();
-        sut.toString();
-
-        //ok(clcFake.blackBright.calledTwice);
-      });
     });
 
     describe('setMaxLogLines', function() {
@@ -412,10 +375,10 @@ describe('data/types.js test suite', function() {
 
         sut.toString();
 
-        ok(clcFake.black.bgRed.calledTwice);
-        ok(clcFake.black.bgRed.getCall(0).calledWithExactly('line 1'));
-        ok(clcFake.black.bgRed.getCall(1).calledWithExactly('line 2'));
-        expect(clcFake.black.bgRed.getCall(2)).to.be.null;
+        ok(logSpy.calledTwice);
+        ok(logSpy.getCall(0).calledWithExactly('line 1'));
+        ok(logSpy.getCall(1).calledWithExactly('line 2'));
+        expect(logSpy.getCall(2)).to.be.null;
       });
 
       it('should not error out when there are no errors', function() {
@@ -439,9 +402,9 @@ describe('data/types.js test suite', function() {
         ];
         sut.toString();
 
-        ok(clcFake.black.bgRed.calledOnce);
-        ok(clcFake.black.bgRed.getCall(0).calledWithExactly('some string'));
-        expect(clcFake.black.bgRed.getCall(1)).to.be.null;
+        ok(logSpy.calledOnce);
+        ok(logSpy.getCall(0).calledWithExactly('some string'));
+        expect(logSpy.getCall(1)).to.be.null;
       });
     });
 
@@ -457,12 +420,12 @@ describe('data/types.js test suite', function() {
           'def <-ppkf:slfkjdlfksj',
         ];
         sut.toString();
-        ok(clcFake.black.bgRed.getCall(0).calledWithExactly('some stuff'));
-        ok(clcFake.black.bgRed.getCall(1).calledWithExactly('hello world '));
-        ok(clcFake.black.bgRed.getCall(2).calledWithExactly('abc '));
-        ok(clcFake.black.bgRed.getCall(3).calledWithExactly('123'));
-        ok(clcFake.black.bgRed.getCall(4).calledWithExactly('def '));
-        expect(clcFake.black.bgRed.getCall(5)).to.be.null;
+        ok(logSpy.getCall(0).calledWithExactly('some stuff'));
+        ok(logSpy.getCall(1).calledWithExactly('hello world '));
+        ok(logSpy.getCall(2).calledWithExactly('abc '));
+        ok(logSpy.getCall(3).calledWithExactly('123'));
+        ok(logSpy.getCall(4).calledWithExactly('def '));
+        expect(logSpy.getCall(5)).to.be.null;
       });
     });
 
@@ -503,9 +466,9 @@ describe('data/types.js test suite', function() {
 
           sut.toString();
 
-          ok(clcFake.black.bgRed.calledTwice);
-          ok(clcFake.black.bgRed.getCall(0).calledWithExactly('some/file.js:123'));
-          ok(clcFake.black.bgRed.getCall(1).calledWithExactly('another/file.js:345:23'));
+          ok(logSpy.calledTwice);
+          ok(logSpy.getCall(0).calledWithExactly('some/file.js:123'));
+          ok(logSpy.getCall(1).calledWithExactly('another/file.js:345:23'));
         });
       });
 
@@ -524,9 +487,9 @@ describe('data/types.js test suite', function() {
           dt.setErrorFormatterMethod(alternateFormatMethod);
           sut.toString();
 
-          ok(clcFake.black.bgRed.calledTwice);
-          ok(clcFake.black.bgRed.getCall(0).calledWithExactly('Bob Dole error1'));
-          ok(clcFake.black.bgRed.getCall(1).calledWithExactly('Bob Dole error2'));
+          ok(logSpy.calledTwice);
+          ok(logSpy.getCall(0).calledWithExactly('Bob Dole error1'));
+          ok(logSpy.getCall(1).calledWithExactly('Bob Dole error2'));
         });
       });
     });

@@ -24,13 +24,11 @@ describe('printers.js test suite', function() {
   beforeEach(function(done) {
     clcFake = {
       'red':          sinon.stub(),
-      'redBright':    sinon.stub(),
       'cyan':         sinon.stub(),
       'green':        sinon.stub(),
       'move': {
         'right':      sinon.stub()
       },
-      'blackBright':  sinon.stub(),
       'white':        sinon.stub(),
       'yellow':       sinon.stub(),
       'xterm':        sinon.stub()
