@@ -29,7 +29,6 @@ describe('printers.js test suite', function() {
       'move': {
         'right':      sinon.stub()
       },
-      'blackBright':  sinon.stub(),
       'white':        sinon.stub(),
       'yellow':       sinon.stub(),
       'xterm':        sinon.stub()

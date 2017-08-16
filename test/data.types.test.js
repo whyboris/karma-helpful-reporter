@@ -20,7 +20,6 @@ describe('data/types.js test suite', function() {
     right = 'right>';
 
     clcFake = {
-      'blackBright': sinon.stub(),
       'erase': sinon.stub(),
       'red': sinon.stub(),
       'white': sinon.stub(),
@@ -338,8 +337,6 @@ describe('data/types.js test suite', function() {
       // ok(clcFake.yellow.calledOnce);
       // ok(clcFake.yellow.calledWithExactly(name));
 
-      // ok(clcFake.blackBright.calledOnce);
-      // ok(clcFake.blackBright.getCall(0).calledWithExactly(errors[1]));
       // ok(clcFake.black.bgRed.calledOnce);
       // ok(clcFake.black.bgRed.getCall(0).calledWithExactly(errors[2]));
     });
@@ -347,17 +344,15 @@ describe('data/types.js test suite', function() {
     it('should return the expected string when toString is called', function() {
       var expected, actual;
       var yellow = 'yellow>';
-      var blackBright = 'blackBright>';
       var bgRed = 'bgRed>';
 
       clcFake.yellow.returns(yellow);
-      clcFake.blackBright.returns(blackBright);
       clcFake.black.bgRed.returns(bgRed);
 
       expected = [
         right + yellow,
         right + '1) ',
-        right + blackBright,
+        right,
         right + bgRed,
       ].join('\n');
 
