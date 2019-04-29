@@ -88,4 +88,4 @@ Set custom colors by using permitted [cli-color](https://github.com/medikoo/cli-
 Notes
 ===
 
-This project was copied from [karma-nyan-reporter](https://github.com/dgarlitt/karma-nyan-reporter/) in July 2017 with intent to build on and improve its functionality. Code cleanup and refactoring will happen during August 2017.
+This project was forked from [karma-nyan-reporter](https://github.com/dgarlitt/karma-nyan-reporter/) in July 2017 and upadted with improved functionality.
