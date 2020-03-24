@@ -4,7 +4,7 @@
     "url": "https://github.com/whyboris/karma-helpful-reporter/issues"
   },
   "dependencies": {
-    "cli-color": "1.2.0"
+    "cli-color": "1.4.0"
   },
   "description": "Karma reporter with helpful style logging.",
   "devDependencies": {
